@@ -1,0 +1,11 @@
+.silver{
+    display : flex;
+    
+    background: url("/media/static_images/svg_star/starblack.svg") no-repeat top left;
+  
+  }
+  .gold{
+    display : flex;
+    background: url("/media/static_images/svg_star/gold.svg") no-repeat top left;
+  
+  }

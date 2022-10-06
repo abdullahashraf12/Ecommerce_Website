@@ -2,51 +2,48 @@
     {% load static %}
     <head>
         <title></title>
-        <link rel="stylesheet" href="{%  static 'css/star_rating_style.css' %}">
+        <!-- <link rel="stylesheet" href="{%  static 'css/star_rating_style_for_this_page.css' %}"> -->
+
         <link rel="stylesheet" href="{%  static 'css/progress.css' %}">
+        <link rel="stylesheet" href="{%  static 'css/star_rating_style.css' %}">
 
     </head>
     <body>
+        <div style="float: left;">
+             <div style="float:left;"><label><div  class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden"  disabled> </a> </div></label><label><div  class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label><label><div   class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label><label><div  class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label><label><div   class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label><label><div   class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label><label><div   class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label></div>
 
-
-
-              <div id="div_1" class="gold" style="float: left;">
-                <label>
+              <!-- <div id="div_1" class="gold" style="float: left;">
+              </div>
+              
+                    <div>
                 <input id="1" type="radio" name="rating" style="visibility:hidden" checked >
-            </label>
             </div>
 
             <div id="div_2" class="gold" style="float: left;">
-                <label>
 
                 <input id="2" type="radio" name="rating" style="visibility:hidden" checked>
-            </label>
             </div>
-            <label>
 
             <div id="div_3"  class="gold" style="float: left;">
 
                 <input id="3" type="radio" name="rating" style="visibility:hidden" checked>
 
             </div>
-            </label>
-            <label>
 
             <div id="div_4" class="gold" style="float: left;">
 
                 <input id="4" type="radio" name="rating" style="visibility:hidden" checked>
             </div>
-            </label>
-            <label>
+            
 
             <div id="div_5"  class="gold" style="float: left;">
 
                 <input id="5" type="radio" name="rating" style="visibility:hidden" checked>
-            </div>
-            </label>
-            <label>
+            </div> -->
+        </div>
 
-          
+
+
 <div id ="parent">
     {% for i in general_rate %}
   <h3>{{ i.Number_of_review }} out of 7</h3>
@@ -55,11 +52,11 @@
 
 </div>
 </div>
-
+<!-- 
 <h3>{{ prod_name }}</h3>
 <h3>{{ child_name }}</h3>
 <h3>{{ cat_name }}</h3>
-
+ -->
 
         </div>
         <script src="{%  static 'js/jquery-3.4.1.min.js' %}" ></script>
