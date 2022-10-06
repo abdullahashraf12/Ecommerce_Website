@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+{% load static %}
+    
+    <head>
+    <meta charset="utf-8">
+    <title>H1Market</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/favjpg.jpg' %}" >
+
+    
+    <link href="{% static 'css/1.css' %}" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="{% static 'css/2.css' %}" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/star_rating_style.css' %}" rel="stylesheet">
+
+
+
+</head>
+
+<body >
+ 
+
+    <div class="container-fluid">
+        <div >
+            
+            <div class="col-lg-6 text-center text-lg-right"  style="margin-left: auto; ">
+                {% if account == None %}
+                {% else %}
+                <img src="media/{{ profile_image }}" style=" height:40px; width: 40px; ;  border-radius: 40%; border: none;">
+                {%endif%}
+                
+
+                <div class="d-inline-flex align-items-center">
+
+                    <div class="btn-group">
+                        
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            {% if account == None %}
+
+                            <a class="text-body mr-3" href="{% url 'sign_in' %}">Sign In</a>
+                            <a class="text-body mr-3" href="{% url 'sign_up' %}">Sign Up</a>
+                            {% else %}
+                            <a class="text-body mr-3" href="{% url 'Logout' %}">Logout</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+
+                    
+                </div>
+                <div class="btn-group mx-2">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">EUR</button>
+                            <button class="dropdown-item" type="button">GBP</button>
+                            <button class="dropdown-item" type="button">CAD</button>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">FR</button>
+                            <button class="dropdown-item" type="button">AR</button>
+                            <button class="dropdown-item" type="button">RU</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-inline-flex align-items-center d-block d-lg-none">
+                    <a href="" class="btn px-0 ml-2">
+                        <i class="fas fa-heart text-dark"></i>
+                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    </a>
+                    <a href="" class="btn px-0 ml-2">
+                        <i class="fas fa-shopping-cart text-dark"></i>
+                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+            <div class="col-lg-4">
+                <a href="{% url 'index' %}" class="text-decoration-none" >
+                    <span class="h1 text-uppercase bg-light px-2" style="border-color:black; color: black;">H1</span>
+                                <span class="h1  bg-primary px-2 ml-n1" style="filter: invert(1); color:white ;">Market</span>
+                        </a>
+            </div>
+            <div id="remove_for_mobile"  class="col-lg-4 col-6 text-left" style="width: max-content;">
+                <form action="{% url 'all' %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="input-group">
+                        <input type="text" class="form-control"  style="width: max-content; " name="search_textfield" id="search_textfield"    placeholder="Search For Products">   
+                        <button type="submit"  style="width: max-content; filter: invert(1);"  class="btn btn-outline-primary" >Search</button>           
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="col-lg-4 col-6 text-right">
+                <p class="m-0">Customer Service</p>
+                <h5 class="m-0">+012 345 6789</h5>
+            </div> -->
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-dark mb-30" style="background-color: black;">
+        <div class="row px-xl-5" style="background-color: black;">
+            <div class="col-lg-3 d-none d-lg-block" style="background-color: black;">
+                <a data-toggle="collapse" href="#navbar-vertical" style="height: 60px; padding: 0 30px; ">
+                    <h6 style="color: aqua; width:max-content ;">Categories</h6>
+                    <!-- <i class="fa fa-angle-down text-dark"></i> -->
+                </a>
+                <!-- <div class="nav-item dropdown dropright">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ key }} <i class="fa fa-angle-right float-right mt-1"></i></a>
+                            <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                                <a href="" class="dropdown-item">{{ value }}</a> 
+                                 -->
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                    <div class="navbar-nav w-100">
+                    
+                        
+                        {% for v in categories %}
+                        <div class="nav-item dropdown dropright" style="float: left;">
+                            <form action="{% url 'all' %}" method="POST">
+                                {% csrf_token %}
+                                
+                                <input type="hidden" value="{{ v }}" name="categories_list"/>
+
+                                <button class="btn btn-light text-left" style="height: 100%; width: 100%; color: black; background-color: aqua; border: none; "  type="submit">
+                                    <b>{{ v }}</b>
+                                </button>
+                                
+                            
+                            
+                        </form>
+                        </div>
+                        {% endfor %}
+
+                       
+                    
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9" style="background-color: black;">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0" style="background-color: black;">
+                    <a href="{% url 'index' %}" class="text-decoration-none d-block d-lg-none" >
+                        <span class="h1 text-uppercase bg-light px-2" style="border-color:black; color: black;">H1</span>
+                                    <span class="h1  bg-primary px-2 ml-n1" style="filter: invert(1); color:white ;">Market</span>
+                     </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon" ></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse"   style="background-color: black;" >
+                        
+                        <div class="navbar-nav mr-auto py-0" style="background-color: black;">
+                            <a href="{% url 'index' %}" class="nav-item nav-link" style="background-color: black; color: aqua;">Home</a>
+                            
+                            <a href="{% url 'contact' %}" class="nav-item nav-link" style="color: White; color: aqua;">Contact</a>
+                        </div>
+
+
+
+
+
+
+                        
+                        
+
+
+
+
+
+
+                     
+                            
+
+
+                        <div class="btn-group" style="margin-left: 1px;  display: inline-block;">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;">
+
+                            <img src="media/static_images/shopping_cart.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;"  style="display: inline-block;">
+                              <!-- Action -->
+                            </button>
+                            <!-- <div class="dropdown-menu" style=" margin-left: 1px; width:fit-content; height:fit-content ;  ">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Separated link</a>
+                            </div> -->
+<!--                           
+
+Data Should Be Disblayed Here
+
+ -->
+
+
+
+                          </div>
+
+
+
+
+                          <div class="btn-group" style="margin-left: 1px;  display: inline-block;">
+
+                                <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;" >
+                                     <img src="media/static_images/check_out.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;  background-color: transparent;"> 
+                                </button>
+
+<!--                           
+
+Data Should Be Disblayed Here
+
+ -->
+
+
+                          </div>
+
+
+
+
+
+
+
+<!-- 
+                            <div style="color: aliceblue;"  >
+                                <a  data-toggle="collapse" href="#navbar-vertical__" style="color: white;">
+                                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
+                                            <img src="media/static_images/shopping_cart.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;">
+                                        </div>
+
+                                     <i class="fa fa-angle-down text-dark"></i> -->
+                                <!-- </a> -->
+                                <!-- <div class="nav-item dropdown dropright">
+                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ key }} <i class="fa fa-angle-right float-right mt-1"></i></a>
+                                            <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                                                <a href="" class="dropdown-item">{{ value }}</a> 
+                                                 -->
+                                <!-- <nav class="collapse position-absolute navbar navbar-vertical__ navbar-light align-items-start p-0 bg-light" id="navbar-vertical__" style="width: calc(100% - 30px); z-index: 999;">
+                                    <div class="navbar-nav w-100">
+                                     -->
+                                        
+                                        <!-- {% for v in categories %}
+                                        <div class="nav-item dropdown dropright">
+                                            <form action="{% url 'all' %}" method="POST">
+                                                {% csrf_token %}
+                                                
+                                                <input type="hidden" value="{{ v }}" name="categories_list"/>
+                
+                                                <button class="btn btn-light" type="submit">
+                                                    {{ v }}
+                                                </button>
+                                                
+                                            
+                                            
+                                        </form>
+                                        </div>
+                                        {% endfor %} -->
+                
+                                       
+                                    
+                                    <!-- </div>
+                                </nav>
+                            </div>  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            
+
+
+
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div style="background-color: white; margin-left: 20px;" >
+        <form action="{% url 'all' %}" method="POST" >
+            {% csrf_token %}
+
+            <div id="for_mobile">
+        </div>
+
+               
+        </form>
+</div>  
+
+<br>
+<br>
+
+
+     {% for d in data %}
+   
+
+
+    
+    <div class="container-fluid pb-5">
+        <div class="row px-xl-5" id="gh" style="max-width:100%; max-height:80%;">
+            <div class="col-lg-5 mb-30" style="max-width:100%; max-height:80%;">
+            <img class="w-100 h-100" src="media/{{ d.img }}" style="object-fit: contain;" alt="Image">
+            </div>
+            <div class="col-lg-7 h-auto mb-30">
+                <div class="h-100 bg-light p-30">
+                    <h3 id="prod_name_global" name="prod_name_global">{{ d.product_name }}</h3>
+                    <div class="d-flex mb-3">
+                        <div class="text-primary mr-2">
+                            <small class="fas fa-star"></small>
+                            <small class="fas fa-star"></small>
+                            <small class="fas fa-star"></small>
+                            <small class="fas fa-star-half-alt"></small>
+                            <small class="far fa-star"></small>
+                        </div>
+                        <small class="pt-1">Category <b id="category_name_global" name="category_name_global">{{ d.category_name }}</b></small>
+    
+                    </div>
+                    <small> Sub Category <b id="child_name_global" name="child_name_global">{{ d.child_category }}</b></small>
+                    <br>
+                    
+                    <div style="display: inline-block;">
+                    <h6 class="font-weight-semi-bold mb-4"> <h3>Price:</h3> </h6>
+                    </div>  
+
+                        <div style="display: inline-block; border: 1px">
+
+                        <b style="color: yellowgreen;"><h3>  {{ d.price }} {{ d.currency }} </b> </h3></b>
+
+                    </div>
+                    <p class="mb-4">Bried Description {{ d.brief_description }}</p>
+                    <div class="d-flex mb-3" style="float: left;">
+                        <strong class="text-dark mr-3" id="child_sizes">Sizes:</strong>
+                        </div>
+                        <div class="d-flex mb-3">
+                        <form>
+                            {% for sizes in d.size_of_clothes %}
+                            {% if sizes == "0" %}
+                      <script>
+                         element = document.getElementById("child_sizes");
+                            element.remove();
+                      </script>
+                      {%  else  %}
+                        <div class="custom-control custom-radio custom-control-inline" style="float: left;">
+                            <input type="radio" class="custom-control-input" id="{{ sizes }}" name="size">
+                            <label class="custom-control-label" for="{{ sizes }}">{{ sizes }}</label>
+                        </div>
+                        {% endif %}
+
+                        {% endfor %}
+                        <!-- <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="size-2" name="size">
+                            <label class="custom-control-label" for="size-2">S</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="size-3" name="size">
+                            <label class="custom-control-label" for="size-3">M</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="size-4" name="size">
+                            <label class="custom-control-label" for="size-4">L</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="size-5" name="size">
+                            <label class="custom-control-label" for="size-5">XL</label>
+                        </div> -->
+                    </form>
+                    </div>
+                    <div class="d-flex mb-4" style="float: left;">
+                        <strong class="text-dark mr-3" id="child_color"  >Colors:</strong>
+                        </div>
+                        <div class="d-flex mb-4"  >
+
+                        <form>
+                            {% for c in d.color  %}
+                            {% if c == "0" %}
+
+                            <script>
+                                const element = document.getElementById("child_color");
+                                element.remove();
+                            </script>
+
+
+
+                            {% else %}
+
+                            <div class="custom-control custom-radio custom-control-inline" style="float: left;">
+                                <input type="radio" class="custom-control-input" id="{{ c }}" name="color">
+                                <label class="custom-control-label" for="{{ c }}" >{{ c }}</label>
+                            </div>
+                            {% endif %}
+
+                            {% endfor %}
+<!-- 
+                             <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="color-2"  name="color">
+                                <label class="custom-control-label" for="color-2">White</label>
+                            </div> -->
+<!--
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="color-3" name="color">
+                                <label class="custom-control-label" for="color-3">Red</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="color-4" name="color">
+                                <label class="custom-control-label" for="color-4">Blue</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="color-5" name="color">
+                                <label class="custom-control-label" for="color-5">Green</label>
+                            </div> -->
+                        </form>
+                    </div>
+                    
+                  
+
+
+
+                        <div class="d-flex align-items-center mb-4 pt-2">
+
+
+                    
+                            <div class="input-group quantity mr-3" style="width: 130px;">
+                                <div class="input-group-btn">
+                                    <button type="submit" id="minus" class="btn btn-outline-warning">
+                                        -
+                                    </button>
+                                </div>
+                                <input id="quan" type="text" class="form-control" style="background-color:white;" value="1">
+                                <div class="input-group-btn">
+                                    <form  id="quan_f"   method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input hidden name="quan12" placeholder="Type your Account"  value="gggg">
+
+                                    <button type="submit" id="plus" class="btn btn-outline-warning">
+                                        +
+                                    </button>
+                                    <input hidden id="cat_name1" name="cat_name" placeholder="Type your Account" value="{{ d.category_name }}">
+                                    <input hidden id="child_name2" name="child_name" placeholder="Type your Account" value="{{ d.child_category }}">
+                                    <input hidden id="prod_name3" name="prod_name" placeholder="Type your Account" value="{{ d.product_name }}">
+        
+
+
+                                </form>
+
+                                </div>
+
+                            </div>
+
+                            <!-- <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                                Cart</button> -->
+
+
+
+
+
+                        <button class="btn btn-outline-primary"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                            Cart</button>
+                    </div>
+
+
+
+<!-- 
+
+                    <div class="d-flex align-items-center mb-4 pt-2">
+                        <div class="input-group quantity mr-3" style="width: 130px;">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary btn-minus">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary btn-plus">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                            Cart</button>
+                    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="d-flex pt-2">
+                        <strong class="text-dark mr-2">Share on:</strong>
+                        <div class="d-inline-flex">
+                            <a class="text-dark px-2" href="">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a class="text-dark px-2" href="">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a class="text-dark px-2" href="">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a class="text-dark px-2" href="">
+                                <i class="fab fa-pinterest"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="bg-light p-30">
+                    <div class="nav nav-tabs mb-4">
+                        <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
+                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
+                        <a class="nav-item nav-link text-dark" id="data_length" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-pane-1">
+                            <h4 class="mb-3">Product Description</h4>
+                            <p>{{d.Full_description}}</p>
+                        </div>
+                        <div class="tab-pane fade" id="tab-pane-2">
+                            <h4 class="mb-3">Additional Information</h4>
+                            <p>{{ d.information }}</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- <ul class="list-group list-group-flush">
+                                        <li class="list-group-item px-0">
+                                            Sit erat duo lorem duo ea consetetur, et eirmod takimata.
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            Duo amet accusam eirmod nonumy stet et et stet eirmod.
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                        </li>
+                                      </ul>  -->
+                                </div>
+                                <!-- <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item px-0">
+                                            Sit erat duo lorem duo ea consetetur, et eirmod takimata.
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            Duo amet accusam eirmod nonumy stet et et stet eirmod.
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                        </li>
+                                      </ul> 
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-pane-3">
+                            <div class="row">
+                                
+                                <!-- <div id="number_of_reviews" class="col-md-6" >
+                                    <h4 id="nummber_of_reveiws" class="mb-4">1 review for "Product Name"</h4>
+                                    </div>
+ -->
+
+
+
+
+                                    <div id="parent_comm" class="col-md-6" >
+                                    <div id="div_comment" class="media mb-4">
+                                        
+                                        <img id="client_pic" src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                        
+                                        <div id="comment_body" class="media-body">
+                                        
+                                            <h6 id="client_name" >John Doe<small> - <i id="date_from_db">01 Jan 2045</i></small></h6>
+                                            <!-- <small> - <i id="rating_from_db"></i></small> -->
+                                            <div id="rating_s" class="text-primary mb-2"><!-- star rating goes here --></div>
+                                        
+                                            <p id="client_comment">Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                        
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                <div  id="div_review">
+                                <div class="col-md-6">
+                                    <h4 class="mb-4">Leave a review</h4>
+                                    <small>Your email address will not be published. Required fields are marked </small>
+                                    <br>
+                                    <br>
+                                    <form id="review"  method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                    <input id="rating_input" value="" hidden>
+                                    <div class="mb-4" style="float: left;">
+                                                <p class="mb-4" style="float: left;">Your Rating * :  </p>
+                                                </div>
+                                        <label>
+
+                                        <div id="div_1" class="silver" style="float: left;">
+                                            <input id="1" type="radio" name="rating" style="visibility:hidden"  >
+                                        </div>
+                                    </label>
+
+                                        <label>
+
+                                        <div id="div_2" class="silver" style="float: left;">
+                            
+                                            <input id="2" type="radio" name="rating" style="visibility:hidden">
+                                        </div>
+                                    </label>
+
+                                        <label>
+                                        <div id="div_3"  class="silver" style="float: left;">
+                            
+                                            <input id="3" type="radio" name="rating" style="visibility:hidden">
+                                        </div>
+                                        </label>
+                            
+                                        <label>
+                                        <div id="div_4" class="silver" style="float: left;">
+                            
+                                            <input id="4" type="radio" name="rating" style="visibility:hidden">
+                                        </div>
+                                        </label>
+                            
+                                        <label>
+                                        <div id="div_5"  class="silver" style="float: left;">
+                            
+                                            <input id="5" type="radio" name="rating" style="visibility:hidden">
+                                        </div>
+                                        </label>
+                            
+                                        <label>
+                                        <div id="div_6"  class="silver" style="float: left;">
+                                            <input id="6" type="radio" name="rating" style="visibility:hidden">
+                                        </div>
+                                        </label>
+                            
+                                        <label>
+                                        <div  id="div_7" class="silver" style="float: left;">
+                                            <input id="7" type="radio" name="rating" style="visibility:hidden">
+                                          </div>
+                                          </label>
+                                        </div>
+                                    
+                                            <br>
+                                            <br>
+                                            <div class="form-group">
+                                                <label for="client_message">Your Review *</label>
+    
+                                                <textarea id="client_message" name="client_message" cols="30" rows="5" class="form-control"></textarea>
+                                            </div>
+    
+    
+    
+    
+    
+                                            <input id="client_account" value="{{ account }}" hidden >
+                                            {% if account == None %}
+                                            <div class="form-group">
+                                                <label for="name">Your Name *</label>
+                                                <input type="text" class="form-control" id="name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Your Email *</label>
+                                                <input type="email" class="form-control" id="email">
+                                            </div>
+                                            {% endif %}
+                                            
+                                            <div class="form-group mb-0">
+                                                <button type="submit" id="button_submit_review" class="btn btn-primary px-3">
+                                                    Submit Review</button>
+                                            </div>
+
+                                        </div>
+                                </div>
+                            </form>
+
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Shop Detail End -->
+
+
+    <!-- Products Start -->
+    <div class="container-fluid py-5">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">You May Also Like</span></h2>
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="owl-carousel related-carousel">
+                    <div class="product-item bg-light">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small>(99)</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-item bg-light">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="img/product-2.jpg" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small>(99)</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-item bg-light">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="img/product-3.jpg" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="">{{ data.product_name }}</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small>(99)</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-item bg-light">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="img/product-4.jpg" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small>(99)</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-item bg-light">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="img/product-5.jpg" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small>(99)</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Products End -->
+
+
+    <!-- Footer Start -->
+   
+     <!-- Footer Start -->
+     <div style="color:black">
+
+        <!-- class="container-fluid bg-dark text-secondary mt-5 pt-5" -->
+        <div class="row px-xl-5 pt-5">
+            
+
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5" style="height:50%;">
+                <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
+                {% for a in cmp_det %}
+                <p><b>Address: </b>{{ a.Address }}</p>
+                <p><b>E-mail: </b>{{ a.E_Mail }}</p>
+                <p><b>Give Us A Call: </b>{{ a.Company_Number }}</p>
+
+                {% endfor %}
+            </div>
+
+
+
+
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">SUPPORT</h5>
+                        <div  class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Help</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>FAQs</a>
+                            
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-5" style="float:left;">
+            <div style="margin-left: 10%;">
+            <h5 class="text-secondary text-uppercase mb-4">NEWSLETTER</h5>
+            <p style="color: black;">Would you would like to receive our latest products</p>
+            <form action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Your Email Address">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        </div>
+
+
+        <div style="margin-left: 50%; float:left;">
+            <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
+            <div>
+                <a href="https://www.facebook.com/">
+                    
+                    <img src="media/static_images/social_media_icons/facebook.png" style=" height: 40px;; width: 40px; "  >
+                </a>
+                <a  href="https://www.instagram.com/">
+                    <img src="media/static_images/social_media_icons/instagram.jpg" style=" height: 40px;; width: 40px; "  >
+
+                </a>
+                <a href="https://www.twitter.com/">
+                    <img src="media/static_images/social_media_icons/twitter.jpg" style=" height: 40px;; width: 40px; "  >
+
+                </a>
+                <a href="https://www.linkedin.com/">
+                    <img src="media/static_images/social_media_icons/linkedin.png" style=" height: 40px;; width: 40px; "  >
+
+                </a>
+            </div>
+    
+        </div>
+
+
+        <!-- <div class="row border-top mx-xl-5 py-4" style="clear: both; border-color: rgba(256, 256, 256, .1) !important;">
+            <div class="col-md-6 px-xl-0">
+                <p class="mb-md-0 text-center text-md-left text-secondary">
+                    &copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
+                    by
+                    <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
+                </p>
+            </div>
+            <div class="col-md-6 px-xl-0 text-center text-md-right">
+                <img class="img-fluid" src="img/payments.png" alt="">
+            </div>
+    
+        </div> -->
+
+    <br>
+
+       
+
+    <div>
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><button class="btn btn-outline-primary" style="background-color: white ;"> Up</button></a>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+    <!-- JavaScript Libraries -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'mail/contact.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/product_counts.js' %}"></script>
+    <script src="{% static 'js/star_rating.js' %}"></script>
+    <script src="{% static 'js/review_ajax.js' %}"></script>
+    <script src="{% static 'js/get_review_ajax.js' %}"></script>
+    <script src="{% static 'js/search_bar_for_mobile.js' %}"></script>
+
+
+    <script>
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

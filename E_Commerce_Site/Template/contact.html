@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>H1Market</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <!-- <link href="img/favicon.ico" rel="icon">
+
+    <!- Google Web Fonts -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">   -->
+
+    <!-- Font Awesome -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> -->
+
+    <!-- Libraries Stylesheet -->
+    <!-- <link href="lib/animate/animate.min.css" rel="stylesheet"> -->
+    <!-- <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <link rel="icon" href="{% static 'img/favjpg.jpg' %}" >
+
+    
+    <link href="{% static 'css/1.css' %}" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="{% static 'css/2.css' %}" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+    crossorigin=""/>
+
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+
+
+
+    <link href="{% static 'css/popup.css' %}" rel="stylesheet">  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div >
+            
+            <div class="col-lg-6 text-center text-lg-right"  style="margin-left: auto; ">
+                {% if account == None %}
+                {% else %}
+                <img src="media/{{ profile_image }}" style=" height:40px; width: 40px; ;  border-radius: 40%; border: none;">
+                {%endif%}
+                
+
+                <div class="d-inline-flex align-items-center">
+
+                    <div class="btn-group">
+                        
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            {% if account == None %}
+
+                            <a class="text-body mr-3" href="{% url 'sign_in' %}">Sign In</a>
+                            <a class="text-body mr-3" href="{% url 'sign_up' %}">Sign Up</a>
+                            {% else %}
+                            <a class="text-body mr-3" href="{% url 'Logout' %}">Logout</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+
+                    
+                </div>
+                <div class="btn-group mx-2">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">EUR</button>
+                            <button class="dropdown-item" type="button">GBP</button>
+                            <button class="dropdown-item" type="button">CAD</button>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">FR</button>
+                            <button class="dropdown-item" type="button">AR</button>
+                            <button class="dropdown-item" type="button">RU</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-inline-flex align-items-center d-block d-lg-none">
+                    <a href="" class="btn px-0 ml-2">
+                        <i class="fas fa-heart text-dark"></i>
+                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    </a>
+                    <a href="" class="btn px-0 ml-2">
+                        <i class="fas fa-shopping-cart text-dark"></i>
+                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+            <div class="col-lg-4">
+                <a href="{% url 'index' %}" class="text-decoration-none" >
+                    <span class="h1 text-uppercase bg-light px-2" style="border-color:black; color: black;">H1</span>
+                                <span class="h1  bg-primary px-2 ml-n1" style="filter: invert(1); color:white ;">Market</span>
+                        </a>
+            </div>
+            <div class="col-lg-4 col-6 text-left" style="width: max-content;">
+                <form action="{% url 'all' %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="input-group">
+                        <input type="text" class="form-control"  style="width: max-content; " name="search_textfield" id="search_textfield"    placeholder="Search For Products">
+                        
+                        <button type="submit"  style="width: max-content; filter: invert(1);"  class="btn btn-outline-primary" >Search</button>
+                        
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="col-lg-4 col-6 text-right">
+                <p class="m-0">Customer Service</p>
+                <h5 class="m-0">+012 345 6789</h5>
+            </div> -->
+        </div>
+    </div>
+    <!-- Topbar End -->
+   
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-dark mb-30" style="background-color: black;">
+        <div class="row px-xl-5" style="background-color: black;">
+            <div class="col-lg-3 d-none d-lg-block" style="background-color: black;">
+                <a data-toggle="collapse" href="#navbar-vertical" style="height: 60px; padding: 0 30px; ">
+                    <h6 style="color: aqua; width:max-content ;">Categories</h6>
+                    <!-- <i class="fa fa-angle-down text-dark"></i> -->
+                </a>
+                <!-- <div class="nav-item dropdown dropright">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ key }} <i class="fa fa-angle-right float-right mt-1"></i></a>
+                            <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                                <a href="" class="dropdown-item">{{ value }}</a> 
+                                 -->
+
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                    <div class="navbar-nav w-100">
+                    
+                        {% for v in categories %}
+                        <div class="nav-item dropdown dropright" style="float: left;">
+                            <form action="{% url 'all' %}" method="POST">
+                                {% csrf_token %}
+                                
+                                <input type="hidden" value="{{ v }}" name="categories_list"/>
+
+                                <button class="btn btn-light text-left" style="height: 100%; width: 100%; color: black; background-color: aqua; border: none; "  type="submit">
+                                    <b>{{ v }}</b>
+                                </button>
+                        </form>
+                        </div>
+                        {% endfor %}
+
+                       
+                    
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9" style="background-color: black;">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0" style="background-color: black;">
+                    
+                    
+
+                    <a href="{% url 'index' %}" class="text-decoration-none d-block d-lg-none" >
+                        <span class="h1 text-uppercase bg-light px-2" style="border-color:black; color: black;">H1</span>
+                                    <span class="h1  bg-primary px-2 ml-n1" style="filter: invert(1); color:white ;">Market</span>
+                     </a>
+
+
+
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon" ></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse"   style="background-color: black;" >
+                        
+                        <div class="navbar-nav mr-auto py-0" style="background-color: black;">
+                            <a href="{% url 'index' %}" class="nav-item nav-link" style="background-color: black; color: aqua;">Home</a>
+                            
+                            <a href="{% url 'contact' %}" class="nav-item nav-link" style="color: White; color: aqua;">Contact</a>
+                        </div>
+
+
+
+
+
+
+
+                     
+                            
+
+
+                        <div class="btn-group" style="margin-left: 1px;  display: inline-block;">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;">
+
+                            <img src="media/static_images/shopping_cart.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;"  style="display: inline-block;">
+                              <!-- Action -->
+                            </button>
+                            <!-- <div class="dropdown-menu" style=" margin-left: 1px; width:fit-content; height:fit-content ;  ">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Separated link</a>
+                            </div> -->
+<!--                           
+
+Data Should Be Disblayed Here
+
+ -->
+
+
+
+                          </div>
+
+
+
+
+                          <div class="btn-group" style="margin-left: 1px;  display: inline-block;">
+
+                                <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;" >
+                                     <img src="media/static_images/check_out.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;  background-color: transparent;"> 
+                                </button>
+
+<!--                           
+
+Data Should Be Disblayed Here
+
+ -->
+
+
+                          </div>
+
+
+
+
+
+
+
+<!-- 
+                            <div style="color: aliceblue;"  >
+                                <a  data-toggle="collapse" href="#navbar-vertical__" style="color: white;">
+                                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
+                                            <img src="media/static_images/shopping_cart.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;">
+                                        </div>
+
+                                     <i class="fa fa-angle-down text-dark"></i> -->
+                                <!-- </a> -->
+                                <!-- <div class="nav-item dropdown dropright">
+                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ key }} <i class="fa fa-angle-right float-right mt-1"></i></a>
+                                            <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                                                <a href="" class="dropdown-item">{{ value }}</a> 
+                                                 -->
+                                <!-- <nav class="collapse position-absolute navbar navbar-vertical__ navbar-light align-items-start p-0 bg-light" id="navbar-vertical__" style="width: calc(100% - 30px); z-index: 999;">
+                                    <div class="navbar-nav w-100">
+                                     -->
+                                        
+                                        <!-- {% for v in categories %}
+                                        <div class="nav-item dropdown dropright">
+                                            <form action="{% url 'all' %}" method="POST">
+                                                {% csrf_token %}
+                                                
+                                                <input type="hidden" value="{{ v }}" name="categories_list"/>
+                
+                                                <button class="btn btn-light" type="submit">
+                                                    {{ v }}
+                                                </button>
+                                                
+                                            
+                                            
+                                        </form>
+                                        </div>
+                                        {% endfor %} -->
+                
+                                       
+                                    
+                                    <!-- </div>
+                                </nav>
+                            </div>  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            
+
+
+
+                </nav>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div style="background-color: white; margin-left: 20px;" >
+        <form action="{% url 'all' %}" method="POST" >
+            {% csrf_token %}
+
+            <div id="for_mobile">
+        </div>
+
+               
+        </form>
+</div>  
+    
+<br>
+<br>
+<br>
+
+
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid" id="contact_us_Form">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span style="color: black;">Contact Us</span></h2>
+        
+        <div id="is_valid_true"></div>
+
+</div>
+<div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-7 mb-5">
+                <div class="contact-form bg-light p-30">
+
+                    <form  action="{% url 'contact_us' %}" method="POST">
+                        <div id="contact_form">
+                        {% csrf_token %}
+                    </div>
+                        {% if account != None %}
+
+
+
+                        {% else %}
+                            <input type="text" class="form-control" id="name" name="first_name" placeholder="Your Name" required />
+                            <br>
+                            <input type="email" class="form-control" name="account" id="email" placeholder="Your Email" required />
+                            <br>
+                            {% endif %}
+
+                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required />
+                            <br>
+                            <textarea class="form-control" rows="8" id="message" placeholder="Message" name="message" required></textarea>
+                            <br>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send Message</button>
+                    </form>
+                </div>
+            </div>
+           
+
+
+            <!-- <div class="col-lg-5 mb-5">
+                  
+                <div class="bg-light p-30 mb-30" id="my_map_1">
+                  
+                </div>
+
+                <div class="col-lg-5 mb-5">
+
+                    {% for a in cmp_det %}
+
+                    <p><b>Address: </b>{{ a.Address }}</p>
+                    <p><b>E-mail: </b>{{ a.E_Mail }}</p>
+                    <p><b>Give Us A Call: </b>{{ a.Company_Number }}</p>
+
+                    {% endfor %}
+                       
+                </div>
+                </div>
+                </div>
+                </div> -->
+
+                <div class="col-lg-5 mb-5">
+                    <div class="bg-light p-30 mb-30" >
+                        <div id="my_map_1" style="height: 350px;">
+
+                        </div>
+                    </div>
+                    <div class="bg-light p-30 mb-3">
+                        <!-- <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+                        <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p> -->
+                        
+                        {% for a in cmp_det %}
+                        <h1> Get In Touch </h1>
+                    <p><b>Address: </b>{{ a.Address }}</p>
+                    <p><b>E-mail: </b>{{ a.E_Mail }}</p>
+                    <p><b>Give Us A Call: </b>{{ a.Company_Number }}</p>
+
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <!-- Contact End -->
+
+
+    <!-- Footer Start -->
+
+
+
+
+
+
+
+ <!-- Footer Start -->
+ <div style="color:black">
+
+    <!-- class="container-fluid bg-dark text-secondary mt-5 pt-5" -->
+    <div class="row px-xl-5 pt-5">
+        
+        
+        <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5" style="height:50%;">
+            <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
+                    {% for a in cmp_det %}
+                    <p><b>Address: </b>{{ a.Address }}</p>
+                    <p><b>E-mail: </b>{{ a.E_Mail }}</p>
+                    <p><b>Give Us A Call: </b>{{ a.Company_Number }}</p>
+
+                    {% endfor %}
+        </div>
+
+
+
+
+        <div class="col-lg-8 col-md-12">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 mb-5">
+                    <h5 class="text-secondary text-uppercase mb-4">SUPPORT</h5>
+                    <div  class="d-flex flex-column justify-content-start">
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Help</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>FAQs</a>
+                        
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-5" style="float:left;">
+        <div style="margin-left: 10%;">
+        <h5 class="text-secondary text-uppercase mb-4">NEWSLETTER</h5>
+        <p style="color: black;">Would you would like to receive our latest products</p>
+        <form action="">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Your Email Address">
+                <div class="input-group-append">
+                    <button class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    </div>
+
+
+    <div style="margin-left: 50%; float:left;">
+        <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
+        <div>
+            <a href="https://www.facebook.com/">
+                
+                <img src="media/static_images/social_media_icons/facebook.png" style=" height: 40px;; width: 40px; "  >
+            </a>
+            <a  href="https://www.instagram.com/">
+                <img src="media/static_images/social_media_icons/instagram.jpg" style=" height: 40px;; width: 40px; "  >
+
+            </a>
+            <a href="https://www.twitter.com/">
+                <img src="media/static_images/social_media_icons/twitter.jpg" style=" height: 40px;; width: 40px; "  >
+
+            </a>
+            <a href="https://www.linkedin.com/">
+                <img src="media/static_images/social_media_icons/linkedin.png" style=" height: 40px;; width: 40px; "  >
+
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- <div class="row border-top mx-xl-5 py-4" style="clear: both; border-color: rgba(256, 256, 256, .1) !important;">
+        <div class="col-md-6 px-xl-0">
+            <p class="mb-md-0 text-center text-md-left text-secondary">
+                &copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
+                by
+                <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
+            </p>
+        </div>
+        <div class="col-md-6 px-xl-0 text-center text-md-right">
+            <img class="img-fluid" src="img/payments.png" alt="">
+        </div>
+
+    </div> -->
+
+<br>
+
+   
+
+</div>    
+
+
+
+
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><button class="btn btn-outline-primary" style="background-color: white ;"> Up</button></a>
+
+
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+    <!-- JavaScript Libraries -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Contact Javascript File -->
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/home_ajax.js' %}"></script>
+    <script src="{% static 'js/search_bar_for_mobile.js' %}"></script>
+    <script src="{% static 'js/my_map.js' %}"></script>
+    <script src="{% static 'js/check_client_message.js' %}"></script>
+    <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'mail/contact.js' %}"></script>
+
+
+
+</body>
+
+</html>

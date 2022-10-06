@@ -1,0 +1,11 @@
+.zoom {
+    background-color: transparent;
+    transition: transform .2s;
+    width: max-content;
+    height: max-content;
+
+  }
+
+.zoom:hover {
+transform: scale(1.15); 
+}
