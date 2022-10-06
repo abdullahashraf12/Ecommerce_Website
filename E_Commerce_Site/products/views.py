@@ -533,7 +533,8 @@ class Views_pages:
             print(prod_name)
             return render(request,"star_ref.html",context=cont)
         if(request.method=="GET"):
-            cont={"prod_name":str(prod_name),"child_name":str(child_name),"cat_name":str(cat_name)}
+            data=Products.objects.filter(category_name=cat_name,child_category=child_name,product_name=prod_name).values("Number_of_review")
+            cont={"general_rate":data,"prod_name":str(prod_name),"child_name":str(child_name),"cat_name":str(cat_name)}
 
 
 

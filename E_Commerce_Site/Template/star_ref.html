@@ -48,7 +48,9 @@
 
           
 <div id ="parent">
-  <h3>5 out of 7</h3>
+    {% for i in general_rate %}
+  <h3>{{ i.Number_of_review }} out of 7</h3>
+  {% endfor %}
 <div id="child">
 
 </div>
