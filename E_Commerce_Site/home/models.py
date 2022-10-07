@@ -18,3 +18,10 @@ class sponser(models.Model):
         if not self.is_cleaned:
             self.full_clean()
         super(sponser, self).save(*args, **kwargs) 
+
+
+class Lots_Sponser(models.Model):
+    img_sp = models.ImageField(upload_to = "sponser_lots_img/From_DB/")
+    time_Added = models.DateTimeField(auto_now_add = True)
+    Brief_desc = models.TextField()
+    

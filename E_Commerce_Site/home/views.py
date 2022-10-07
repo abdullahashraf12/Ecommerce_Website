@@ -1,10 +1,11 @@
 from itertools import product
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import sponser
+from .models import sponser,Lots_Sponser
 from products.models import Products
 from global_category_home.models import global_category,category_images_for_home,discounts
 from contact.models import Contact_Us,Company_Details
+
 # from django.views.decorators.clickjacking import xframe_options_exempt
 
 # @xframe_options_exempt
@@ -15,6 +16,7 @@ def home(request):
     for cat_name in cat_list:
         # print(cat_name)
         list_just_names.append(cat_name.get("category"))
+    
     print(list_just_names)
 
     # dictionary_catgory_name["catgory_name"]=list_s
@@ -38,7 +40,16 @@ def home(request):
     print(Products.objects.filter(category_name="Featured Products"))
     r_p=Products.objects.values("category_name","child_category","product_name","price","currency","time_Added","brief_description","img").order_by('-time_Added')[:8]
     comp_details=Company_Details.objects.values("Address","E_Mail","Company_Number")
-    return render(request,"index.html",{"Recent_Products":r_p,"sponser":sponser.objects.all(),"Feature_Products":Products.objects.filter(category_name="Featured Products"),"dis":dis,"num_of_global":range(len(list(category_data.values()))),"category_data":category_data,"discounts_data":discounts_data,"global_image_data":len(category_images_for_h),"categories_list_":categories_list,"account":my_acc,"F_Name":F_Name,"L_Name":L_Name,"profile_image":profile_image,"categories":list_just_names,"cmp_det" : comp_details})
+    lots_sponser=Lots_Sponser.objects.all().values("img_sp")
+    sponser_lots_is_null=0
+    # print(dict(list(lots_sponser)).get("img_sp"))    
+    # print(dict(list(lots_sponser)).get("img_sp"))    
+   
+    if(list(lots_sponser)==[]):
+        sponser_lots_is_null=0
+    else:
+        sponser_lots_is_null=1
+    return render(request,"index.html",{"Recent_Products":r_p,"sponser":sponser.objects.all(),"Feature_Products":Products.objects.filter(category_name="Featured Products"),"dis":dis,"num_of_global":range(len(list(category_data.values()))),"category_data":category_data,"discounts_data":discounts_data,"global_image_data":len(category_images_for_h),"categories_list_":categories_list,"account":my_acc,"F_Name":F_Name,"L_Name":L_Name,"profile_image":profile_image,"categories":list_just_names,"cmp_det" : comp_details,"lots_sponser":list(lots_sponser),"sponser_lots_is_null":sponser_lots_is_null})
 
 def show_data_pics_category(request):
     if(request.method=="GET"):

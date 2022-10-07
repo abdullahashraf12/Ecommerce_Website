@@ -804,31 +804,80 @@ Data Should Be Disblayed Here
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel vendor-carousel">
-                    <div class="bg-light p-4">
-                        <img src="img/vendor-1.jpg" alt="">
+                    
+                     {% if sponser_lots_is_null == 0 %}
+
+                     <div class="bg-light p-4">
+                        <img src="media/sponser_lots_img/vendor-1.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-2.jpg" alt="">
+                        <img src="media/sponser_lots_img/vendor-2.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-3.jpg" alt="">
+                        <img src="media/sponser_lots_img/vendor-3.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-4.jpg" alt="">
+                        <img src="media/sponser_lots_img/vendor-4.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-5.jpg" alt="">
+                        <img src="media/sponser_lots_img/vendor-5.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-6.jpg" alt="">
+                        <img src="media/sponser_lots_img/vendor-6.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-7.jpg" alt="">
+                        <img src="media/sponser_lots_img/vendor-7.jpg" alt="">
                     </div>
                     <div class="bg-light p-4">
-                        <img src="img/vendor-8.jpg" alt="">
+                        <img src="media/sponser_lots_img/vendor-8.jpg" alt="">
+                    </div>
+
+                    
+                    {% else %}
+                    {% for i in lots_sponser %}
+                    <div class="bg-light p-4">
+                        <img src="media/{{ i.img_sp }}" alt="">
+                    </div>
+                    {% endfor %}
+                   {% endif %}
+                </div>
+            </div>
+                <!-- {% for i in lots_sponser %}
+                {%  if i == None  %}
+                <div class="owl-carousel vendor-carousel">
+                    <div class="bg-light p-4">
+                        <img src="media/sponser_lots_img/vendor-1.jpg" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="media/sponser_lots_img/vendor-2.jpg" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="media/sponser_lots_img/vendor-3.jpg" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="media/sponser_lots_img/vendor-4.jpg" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="media/sponser_lots_img/vendor-5.jpg" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="media/sponser_lots_img/vendor-6.jpg" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="media/sponser_lots_img/vendor-7.jpg" alt="">
+                    </div>
+                    <div class="bg-light p-4">
+                        <img src="media/sponser_lots_img/vendor-8.jpg" alt="">
                     </div>
                 </div>
+                {% else %}               
+                <div class="owl-carousel vendor-carousel">
+                    <div class="bg-light p-4">
+                        <img src="media/{{ i.img_sp }}" alt="">
+                    </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %} -->
             </div>
         </div>
     </div>
