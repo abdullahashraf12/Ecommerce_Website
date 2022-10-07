@@ -142,6 +142,51 @@ class Product_Detail:
             return render(request,"detail.html",context)
 
 
+
+        elif(request.method=="POST" and ("view_product_category_3" in request.POST) and ("view_child_category_3" in request.POST) ):
+            print("I am Here 1")   
+            view_product_name=request.POST.get("view_product_name_3")
+            view_product_category=request.POST.get("view_product_category_3")
+            view_child_category=request.POST.get("view_child_category_3")
+            prod_get=Products.objects.filter(product_name=view_product_name,child_category=view_child_category,category_name=view_product_category)
+            my_acc = request.session.get('Account')
+            F_Name = request.session.get('F_Name')
+            L_Name = request.session.get('L_Name')
+            profile_image = request.session.get('p_img')
+            products_alike=Products.objects.filter(~Q(product_name=view_product_name),child_category=str(view_child_category)).values()
+            products_alike_is_null=0
+            print("I am Here 3")   
+            print("I am Here 3")   
+            print("I am Here 3")   
+            print("I am Here 3")   
+            print("I am Here 3")   
+            print("I am Here 3")   
+            print("I am Here 3")   
+            print("I am Here 3")   
+            print("I am Here 3")   
+            print("I am Here 3")   
+            print(products_alike)   
+            print(str(view_product_name))   
+            print(str(view_product_category))   
+            print(str(view_child_category))   
+
+            print(prod_get)   
+
+            if(list(products_alike)==[]):
+                products_alike_is_null=0
+            else:
+                products_alike_is_null=1
+            context={"data":prod_get,"account":my_acc,"F_Name":F_Name,"L_Name":L_Name,"profile_image":profile_image,"categories":list_just_names,"cmp_det" : comp_details,"products_alike":list(products_alike),"products_alike_is_null":products_alike_is_null}
+            self.set_data(context)
+            return render(request,"detail.html",context)
+
+
+
+
+
+
+
+
         elif(request.method=="POST" and ("view_product_category_2" in request.POST) and ("view_child_category_2" in request.POST) and ("view_product_name_2" in request.POST) ):
             
             view_product_category=request.POST.get("view_product_category_2")
@@ -166,6 +211,7 @@ class Product_Detail:
     
             if(list(products_alike)==[]):
                 products_alike_is_null=0
+
             else:
                 products_alike_is_null=1
 

@@ -755,9 +755,9 @@ Data Should Be Disblayed Here
                         <div style="width: 100%; height: min-content; ">
                             <form action="{% url 'detail_product_page' %}" method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" value="{{ i.product_name }}" name="view_product_name3"/>
-                                <input type="hidden" value="{{ i.category_name_id }}" name="view_product_category3"/>
-                                <input type="hidden" value="{{ i.child_category }}" name="view_child_category3"/>
+                                <input type="hidden" value="{{ i.product_name }}" name="view_product_name_3"/>
+                                <input type="hidden" value="{{ i.category_name_id }}" name="view_product_category_3"/>
+                                <input type="hidden" value="{{ i.child_category }}" name="view_child_category_3"/>
                                 <button type="submit" style="border: transparent;; width: 100%; height:300px; border-color: transparent; background: transparent; background-color:transparent ; ">
 
                           <img class="card-img-top zoom" src="/media/{{ i.img }}" style="width: 100%; height:300px; " alt="Card image cap">
@@ -776,9 +776,9 @@ Data Should Be Disblayed Here
                             <div style="display: inline-block; border: 1px">
                             <form action="{% url 'detail_product_page' %}" method="POST">
                                 {% csrf_token %}
-                                <input type="hidden" value="{{ i.product_name }}" name="view_product_name"/>
-                                <input type="hidden" value="{{ i.category_name }}" name="view_product_category"/>
-                                <input type="hidden" value="{{ i.child_category }}" name="view_child_category"/>
+                                <input type="hidden" value="{{ i.product_name }}" name="view_product_name_3"/>
+                                <input type="hidden" value="{{ i.category_name_id }}" name="view_product_category_3"/>
+                                <input type="hidden" value="{{ i.child_category }}" name="view_child_category_3"/>
                                 <button type="submit" class="btn btn-outline-warning">View Product</button>          
                         </form>
                     </div>
