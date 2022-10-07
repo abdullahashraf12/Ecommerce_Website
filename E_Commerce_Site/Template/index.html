@@ -613,7 +613,7 @@ Data Should Be Disblayed Here
 
                         <form action="{% url 'detail_product_page' %}" method="POST">
                             {% csrf_token %}
-                            <input type="hidden" value="{{ i.category_name }}" name="view_product_category"/>
+                            <input type="hidden" value="{{ i.category_name_id }}" name="view_product_category"/>
                             <input type="hidden" value="{{ i.child_category }}" name="view_child_category"/>
                             <input type="hidden" value="{{ i.product_name }}" name="view_product_name"/>
                             
