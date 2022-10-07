@@ -531,12 +531,24 @@ class Views_pages:
             print(cat_name)
             print(child_name)
             print(prod_name)
-            return render(request,"star_ref.html",context=cont)
+
+            return render(request,"star_ref.html",{"cat_name":cat_name,"child_name":str(child_name),"prod_name":str(prod_name)})
         if(request.method=="GET"):
             data=Products.objects.filter(category_name=cat_name,child_category=child_name,product_name=prod_name).values("Number_of_review")
-            cont={"general_rate":data,"prod_name":str(prod_name),"child_name":str(child_name),"cat_name":str(cat_name)}
 
-
+            dsn_tns = cx_Oracle.makedsn('192.168.56.1', '1521', service_name='ORCL') # if needed, place an 'r' before any parameter in order to address special characters such as '\'.
+            conn = cx_Oracle.connect(user=r'abdo', password='01123119835', dsn=dsn_tns) # if needed, place an 'r' before any parameter in order to address special characters such as '\'. For example, if your user name contains '\', you'll need to place 'r' before the user name: user=r'User Name'
+            # sql="select * from v_prod_all where CATEGORY_NAME = '"+cat_name+"' and  CHILD_CATEGORY = '"+child_name+"' and  PRODUCT_NAME = '" + prod_name+"'"
+            sql="select * from v_prod_all where CATEGORY_NAME = 'Electric Devices' and CHILD_CATEGORY='Labtops' and PRODUCT_NAME='Dell Xps 17'"
+            c = conn.cursor()
+            c.execute(sql) # use triple quotes if you want to spread your query across multiple lines
+            row={}
+            for res in CursorByName(c):
+                row.update(res)
+            print(row)
+            
+            conn.close()
+            cont={"general_rate":data,"prod_name":str(prod_name),"child_name":str(child_name),"cat_name":str(cat_name),"row":row}
 
 
             return render(request,"star_ref.html",cont)

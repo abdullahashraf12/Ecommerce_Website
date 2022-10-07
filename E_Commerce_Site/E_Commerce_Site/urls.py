@@ -43,6 +43,7 @@ urlpatterns = [
     path('get_review',p_details.get_review,name="get_review"),
     path('show_sort',prod.show_sort,name="show_sort"),
     path('contact_us',send_message_to_technical_and_managers,name="contact_us"),
+    path('star',prod.star,name="star_2"),
 
     path('star/<str:cat_name>/<str:child_name>/<str:prod_name>/',prod.star,name="star"),
 

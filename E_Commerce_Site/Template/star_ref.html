@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{%  static 'css/star_rating_style.css' %}">
 
     </head>
-    <body>
+    <body style="background-color: white;">
         <div style="float: left;">
              <div style="float:left;"><label><div  class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden"  disabled> </a> </div></label><label><div  class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label><label><div   class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label><label><div  class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label><label><div   class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label><label><div   class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label><label><div   class="gold" style="float: left;"><a href="#" style="display:block; height:100%; width:100%; text-decoration:none;"><input  type="radio"  style="visibility:hidden" disabled></a></div></label></div>
 
@@ -41,26 +41,21 @@
                 <input id="5" type="radio" name="rating" style="visibility:hidden" checked>
             </div> -->
         </div>
+<h1> {{ cat_name }}  </h1>
+<h1> {{ child_name }}  </h1>
+<h1> {{ prod_name }}  </h1>
 
-
-
-<div id ="parent">
-    {% for i in general_rate %}
-  <h3>{{ i.Number_of_review }} out of 7</h3>
-  {% endfor %}
 <div id="child">
 
+    <div style="float:left"> <div style="float:left"> <b>  </b> </div><div style="float:left" id="child"><label for="file"></label><progress  id="file" value="100" max="100">  </progress> </div><div style=" height: 55px; float:left;"  ><b> 100% </b> </div> </div><br> <br>
+
 </div>
 </div>
-<!-- 
-<h3>{{ prod_name }}</h3>
-<h3>{{ child_name }}</h3>
-<h3>{{ cat_name }}</h3>
- -->
+
 
         </div>
         <script src="{%  static 'js/jquery-3.4.1.min.js' %}" ></script>
-        <script src="{%  static 'js/for_iframe_shop.js' %}" ></script>
+         <script src="{%  static 'js/for_iframe_shop.js' %}" ></script>
 
     </body>
 </html>
