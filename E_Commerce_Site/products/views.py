@@ -13,6 +13,8 @@ import cx_Oracle
 from django.core.serializers import serialize
 from contact.models import Contact_Us,Company_Details
 from django.views.decorators.clickjacking import xframe_options_exempt
+from collections import defaultdict
+import json
 
 context_={}
 
@@ -528,11 +530,36 @@ class Views_pages:
             cat_name=request.POST.get("view_product_category")
             child_name=request.POST.get("view_child_category")
             prod_name=request.POST.get("view_product_name")
-            print(cat_name)
-            print(child_name)
-            print(prod_name)
+            # print(cat_name)
+            # print(child_name)
+            # print(prod_name)
+            dsn_tns = cx_Oracle.makedsn('192.168.56.1', '1521', service_name='ORCL') # if needed, place an 'r' before any parameter in order to address special characters such as '\'.
+            conn = cx_Oracle.connect(user=r'abdo', password='01123119835', dsn=dsn_tns) # if needed, place an 'r' before any parameter in order to address special characters such as '\'. For example, if your user name contains '\', you'll need to place 'r' before the user name: user=r'User Name'
+            # sql="select * from v_prod_all where CATEGORY_NAME = '"+cat_name+"' and  CHILD_CATEGORY = '"+child_name+"' and  PRODUCT_NAME = '" + prod_name+"'"
+            sql="select * from v_prod_all where CATEGORY_NAME = '{}'".format(cat_name)+" and CHILD_CATEGORY='{}'".format(child_name)+" and PRODUCT_NAME='{}'".format(prod_name)
+            # print(sql)
 
-            return render(request,"star_ref.html",{"cat_name":cat_name,"child_name":str(child_name),"prod_name":str(prod_name)})
+            c = conn.cursor()
+            c.execute(sql) # use triple quotes if you want to spread your query across multiple lines
+            row={}
+            data_dict = defaultdict(list)
+            
+            for res in CursorByName(c):
+                row.update(res)
+                # print(res)
+                data_dict[0].append(res)
+            conn.close()
+
+            context=''
+            for i in list(data_dict.values()):
+                context+=str(i)
+            data_json=str(context.replace("'",'"'))
+            json_data = json.loads(data_json)
+            for i in json_data:
+                print(i)
+
+            return render(request,"star_ref.html",{"cat_name":cat_name,"child_name":str(child_name),"prod_name":str(prod_name),"json_data":json_data})
+
         if(request.method=="GET"):
             data=Products.objects.filter(category_name=cat_name,child_category=child_name,product_name=prod_name).values("Number_of_review")
 
@@ -548,7 +575,7 @@ class Views_pages:
             print(row)
             
             conn.close()
-            cont={"general_rate":data,"prod_name":str(prod_name),"child_name":str(child_name),"cat_name":str(cat_name),"row":row}
+            cont={"general_rate":data}
 
 
             return render(request,"star_ref.html",cont)
