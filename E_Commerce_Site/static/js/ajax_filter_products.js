@@ -26,6 +26,7 @@ filter_by_data={
     viewing_nummber:"",
     product_name:"",
     category_name:"",
+    page_number:"",
     set set_filter_by_price(price){
         this.filter_by_price=price
     },
@@ -51,7 +52,9 @@ filter_by_data={
     set set_category_name(cat_name){
         this.category_name=cat_name;
     },
-
+    set set_page_number(pg_name){
+        this.page_number=pg_name;
+    },
 
     get get_filter_by_price() {
         return this.filter_by_price;
@@ -76,6 +79,9 @@ filter_by_data={
     get get_category_name() {
         return this.category_name;
     },
+    get get_page_number() {
+        return this.page_number;
+    },
 
 
 
@@ -86,7 +92,11 @@ filter_by_data={
     filter_by_data.set_product_name=product_name_id;
     filter_by_data.set_category_name=category_searched_name;
 
-
+        
+    $('button[name="number_of_this_page"]').on("click",function(){
+        // alert()
+        filter_by_data.set_page_number=$(this).html()
+    })
 
 
 
@@ -277,12 +287,14 @@ filter_by_data={
     
     })
 
+   
 
 // setInterval(function(){
-    $('#latest_products,#latest_popularity,#latest_best_rating,#showing_ten,#showing_twenty,#showing_thirty,#price_all,#price_1,#price_2,#price_3,#price_4,#price_5,#color_all,#color_1,#color_2,#color_3,#color_4,#color_5,#size_all,#size_1,#size_2,#size_3,#size_4,#size_5,#size_6,#size_7').on("click",function(){
-
-        $.ajax({
+    $('#latest_products,#latest_popularity,#latest_best_rating,#showing_ten,#showing_twenty,#showing_thirty,#price_all,#price_1,#price_2,#price_3,#price_4,#price_5,#color_all,#color_1,#color_2,#color_3,#color_4,#color_5,#size_all,#size_1,#size_2,#size_3,#size_4,#size_5,#size_6,#size_7,button[name="number_of_this_page"]').on("click",function(){
     
+
+        
+        $.ajax({
         type :"POST",
         url : "show_sort",
         data:{
@@ -293,6 +305,8 @@ filter_by_data={
             get_number_of_showing: filter_by_data.get_viewing_nummber,
             category_name_from_client : filter_by_data.get_category_name,
             p_name : filter_by_data.get_product_name,
+            page_number:filter_by_data.get_page_number
+            
         },
         headers:{
             // 'X-CSRFToken': $("#my_token").val(),

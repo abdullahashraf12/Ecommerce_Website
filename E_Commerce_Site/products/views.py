@@ -1,6 +1,8 @@
 from cgi import print_arguments
 from itertools import product
 from django.shortcuts import render
+from numpy import double, number
+from pandas import Float32Dtype
 from zmq import PROTOCOL_ERROR_ZMTP_INVALID_SEQUENCE
 from .models import Products
 from global_category_home.models import global_category,discounts
@@ -66,12 +68,21 @@ class Views_pages:
 
             data_from_search=request.POST.get("search_textfield")
             searching_for=request.POST.get("Searching_for")
-
+            default_count=10
             if(data_from_search!=None and searching_for==None):
                 context_Data=Products.objects.filter(product_name__icontains=data_from_search)
                 categories_list=global_category.objects.all()
                 cat_list=list(categories_list.values("category"))
                 list_just_names=[]
+                number_of_products=context_Data.count()
+                number_of_pages=number_of_products/default_count
+                final_number_of_pages=0
+                if(isinstance(number_of_pages,int)):
+                    final_number_of_pages=number_of_pages
+                elif(isinstance(number_of_pages,float)):
+                    final_number_of_pages=int(number_of_pages+1)
+                else:
+                    final_number_of_pages=1
                 for cat_name in cat_list:
                     # print(cat_name)
                     list_just_names.append(cat_name.get("category"))
@@ -80,7 +91,7 @@ class Views_pages:
                 F_Name = request.session.get('F_Name')
                 L_Name = request.session.get('L_Name')
                 profile_image = request.session.get('p_img')
-                context={"context":context_Data,"count":context_Data.count(),"categories":list_just_names,"account":my_acc,"F_Name":F_Name,"L_Name":L_Name,"profile_image":profile_image,"data_from_data_product_name":data_from_search,"product_count":context_Data.count(),"cmp_det" : comp_details}
+                context={"context":context_Data,"count":context_Data.count(),"categories":list_just_names,"account":my_acc,"F_Name":F_Name,"L_Name":L_Name,"profile_image":profile_image,"data_from_data_product_name":data_from_search,"product_count":context_Data.count(),"cmp_det" : comp_details,"no_of_pages":range(1,final_number_of_pages+1),"searched_data":final_number_of_pages}
                 print(categories_list)
                 
                 self.set_data_from_Search_bar(context)
@@ -237,12 +248,12 @@ class Views_pages:
         size=request.POST.get("get_filter_by_size")
         sorting_technique=request.POST.get("get_sorting_technique")
         get_number_of_showing=request.POST.get("get_number_of_showing")
-
         get_data_from_client_by_cate=request.POST.get("category_name_from_client")
         get_data_from_client_by_search=request.POST.get("p_name")
-        # if(get_data_from_client_by_cate==""):
-        # else:
         prices=""
+        page_number=request.POST.get("page_number")
+        print("Number of Pages "+str(page_number))
+
         if(str(price_range).split("-")[0]=="All Prices"):
             prices=str(price_range).split("-")[0]
         elif(price_range==""):
@@ -250,6 +261,21 @@ class Views_pages:
         else:
             prices=str(price_range).split("-")[0]+" and "+str(price_range).split("-")[1]
         
+
+
+
+
+
+# if(isinstance(number_of_pages,int)):
+# final_number_of_pages=number_of_pages
+# elif(isinstance(number_of_pages,float)):
+# final_number_of_pages=int(number_of_pages+1)
+# else:
+# final_number_of_pages=1
+# print("Number of Pages "+str(final_number_of_pages))
+
+
+
         print("Prices is => "+prices)
         print("color =>  "+str(color))
         print("size =>  "+str(size))

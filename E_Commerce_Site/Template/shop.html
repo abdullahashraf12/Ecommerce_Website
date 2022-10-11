@@ -587,6 +587,19 @@ Data Should Be Disblayed Here
         </div>
     </div>
     <!-- Shop End -->
+<div style=" width: 1850px; margin: 50px; display: flex; justify-content: center;">
+   
+        {% for i in no_of_pages %}
+        <!-- <form method="POST"> -->
+            <!-- {% csrf_token %} -->
+        <!-- <input hidden name="seaarched_Data" value="{{ searched_data }}"/> -->
+        <div style="float: left; padding-right: 5px;">
+        <button name="number_of_this_page" style="color: blue; border-color: transparent;">{{ i }}</button>
+         </div>
+        <!-- </form> -->
+         {% endfor %}
+
+</div>
 
 
     <!-- Footer Start -->
@@ -755,6 +768,7 @@ Data Should Be Disblayed Here
     <script src="{% static 'js/ajax_filter_products.js' %}"></script>
     <script src="{% static 'js/search_bar_for_mobile.js' %}"></script>
     <!-- <script src="{% static 'js/main_iframe.js' %}"></script> -->
+    <script src="{% static 'js/for_numbering_pages.js' %}"></script>
 
 </body>
 
