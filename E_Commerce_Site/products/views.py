@@ -76,7 +76,8 @@ class Views_pages:
                 cat_list=list(categories_list.values("category"))
                 list_just_names=[]
                 number_of_products=context_Data.count()
-                number_of_pages=number_of_products/default_count
+
+                number_of_pages=number_of_products/default_count  
                 final_number_of_pages=0
                 if(isinstance(number_of_pages,int)):
                     final_number_of_pages=number_of_pages
@@ -84,8 +85,8 @@ class Views_pages:
                     final_number_of_pages=int(number_of_pages+1)
                 else:
                     final_number_of_pages=1
+
                 for cat_name in cat_list:
-                    # print(cat_name)
                     list_just_names.append(cat_name.get("category"))
                 print(list_just_names)
                 my_acc = request.session.get('Account')
@@ -108,6 +109,7 @@ class Views_pages:
                 categories_list=global_category.objects.all()
                 cat_list=list(categories_list.values("category"))
                 list_just_names=[]
+
                 for cat_name in cat_list:
                     # print(cat_name)
                     list_just_names.append(cat_name.get("category"))
@@ -254,6 +256,8 @@ class Views_pages:
         prices=""
         page_number=request.POST.get("page_number")
         print("Number of Pages "+str(page_number))
+        
+
 
         if(str(price_range).split("-")[0]=="All Prices"):
             prices=str(price_range).split("-")[0]
@@ -304,8 +308,19 @@ class Views_pages:
                 if((str(color)=="" or str(color)=="All Color") and ( str(size) == "" or str(size) == "All Size")  ):
                     if((str(price_range) != "All Prices" and str(price_range) != "")):
                         prices_data_less_than=int(prices.split()[0].replace("$",""))
-                        prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                        prices_data_bigger_than=int(prices.split()[2].replace("$",""))   
                         my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than).order_by("-time_Added")[:number_of_data_to_show].values())
+                        
+                        # number_of_products=my_product_.count()
+                        # number_of_pages=number_of_products/number_of_data_to_show  
+                        # final_number_of_pages=0
+                        # if(isinstance(number_of_pages,int)):
+                        #     final_number_of_pages=number_of_pages
+                        # elif(isinstance(number_of_pages,float)):
+                        #     final_number_of_pages=int(number_of_pages+1)
+                        # else:
+                        #     final_number_of_pages=1
+
                         print("price_range "+str(price_range))
                         print("color "+str(color))
                         print("size "+str(size))
