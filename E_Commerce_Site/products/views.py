@@ -3,6 +3,7 @@ from itertools import product
 from django.shortcuts import render
 from numpy import double, number
 from pandas import Float32Dtype
+from requests import JSONDecodeError
 from zmq import PROTOCOL_ERROR_ZMTP_INVALID_SEQUENCE
 from .models import Products
 from global_category_home.models import global_category,discounts
@@ -266,14 +267,6 @@ class Views_pages:
 
 
 
-# if(isinstance(number_of_pages,int)):
-# final_number_of_pages=number_of_pages
-# elif(isinstance(number_of_pages,float)):
-# final_number_of_pages=int(number_of_pages+1)
-# else:
-# final_number_of_pages=1
-# print("Number of Pages "+str(final_number_of_pages))
-
 
 
         print("Prices is => "+prices)
@@ -291,16 +284,17 @@ class Views_pages:
             color_data=0
             size_data=0
             sort_tech=""
+
             if(str(get_number_of_showing)==""):
                 number_of_data_to_show=10
             else:
                 number_of_data_to_show=int(str(get_number_of_showing))
+
+
             if(str(sorting_technique)==""):
                 sort_tech="Latest"
             else:
                 sort_tech=str(sorting_technique)
-
-
 
             print("Hello     ----- "+str(color))
             print("Hello     ----- "+str(price_range))
@@ -580,11 +574,15 @@ class Views_pages:
             for i in list(data_dict.values()):
                 context+=str(i)
             data_json=str(context.replace("'",'"'))
-            json_data = json.loads(data_json)
-            for i in json_data:
-                print(i)
+            if(data_json==""):
+             
+               return render(request,"star_ref.html",{"cat_name":cat_name,"child_name":str(child_name),"prod_name":str(prod_name),"json_data":None})
 
-            return render(request,"star_ref.html",{"cat_name":cat_name,"child_name":str(child_name),"prod_name":str(prod_name),"json_data":json_data})
+            else:
+                json_data = json.loads(data_json)
+                for i in json_data:
+                    print(i)
+                return render(request,"star_ref.html",{"cat_name":cat_name,"child_name":str(child_name),"prod_name":str(prod_name),"json_data":json_data})
 
         if(request.method=="GET"):
             data=Products.objects.filter(category_name=cat_name,child_category=child_name,product_name=prod_name).values("Number_of_review")
@@ -602,7 +600,6 @@ class Views_pages:
             
             conn.close()
             cont={"general_rate":data}
-
 
             return render(request,"star_ref.html",cont)
 
