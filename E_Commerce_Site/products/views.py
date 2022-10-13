@@ -574,19 +574,16 @@ class Views_pages:
             for i in list(data_dict.values()):
                 context+=str(i)
             data_json=str(context.replace("'",'"'))
-            if(data_json==""):
-             
-               return render(request,"star_ref.html",{"cat_name":cat_name,"child_name":str(child_name),"prod_name":str(prod_name),"json_data":None})
-
-            else:
+            if(data_json!=""):
                 json_data = json.loads(data_json)
                 for i in json_data:
                     print(i)
                 return render(request,"star_ref.html",{"cat_name":cat_name,"child_name":str(child_name),"prod_name":str(prod_name),"json_data":json_data})
+            else:
+                return render(request,"star_ref.html",{"cat_name":cat_name,"child_name":str(child_name),"prod_name":str(prod_name),"data_is_available":"f"})
 
         if(request.method=="GET"):
             data=Products.objects.filter(category_name=cat_name,child_category=child_name,product_name=prod_name).values("Number_of_review")
-
             dsn_tns = cx_Oracle.makedsn('192.168.56.1', '1521', service_name='ORCL') # if needed, place an 'r' before any parameter in order to address special characters such as '\'.
             conn = cx_Oracle.connect(user=r'abdo', password='01123119835', dsn=dsn_tns) # if needed, place an 'r' before any parameter in order to address special characters such as '\'. For example, if your user name contains '\', you'll need to place 'r' before the user name: user=r'User Name'
             # sql="select * from v_prod_all where CATEGORY_NAME = '"+cat_name+"' and  CHILD_CATEGORY = '"+child_name+"' and  PRODUCT_NAME = '" + prod_name+"'"
