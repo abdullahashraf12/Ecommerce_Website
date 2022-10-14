@@ -221,4 +221,3 @@ class Product_Detail:
       
         else:
             return render(request,"detail.html",self.get_data())
-        

@@ -1,0 +1,7 @@
+from django.contrib import admin
+
+# Register your models here.
+class search_and_display(admin.ModelAdmin):
+    search_fields=('global_category',"sub_category","product_name","product_color","product_size","product_quantity","account","user_first_name","user_second_name")
+    list_display= ('global_category', 'sub_category', 'product_name', 'account',"user_first_name","user_second_name","product_color","product_size","product_quantity")
+   

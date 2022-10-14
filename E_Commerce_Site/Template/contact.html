@@ -72,6 +72,7 @@
             <div class="col-lg-6 text-center text-lg-right"  style="margin-left: auto; ">
                 {% if account == None %}
                 {% else %}
+                <input type="hidden" name="{{ account }}" id="account" hidden/>
                 <img src="media/{{ profile_image }}" style=" height:40px; width: 40px; ;  border-radius: 40%; border: none;">
                 {%endif%}
                 

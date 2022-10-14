@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "contact",
     "product_details",
     "multiselectfield",
+    "Purchase",
 
 ]
 

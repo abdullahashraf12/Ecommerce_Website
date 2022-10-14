@@ -10,26 +10,16 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
-    <!-- Favicon -->
     <link rel="icon" href="{% static 'img/favjpg.jpg' %}" >
-
-    
     <link href="{% static 'css/1.css' %}" rel="stylesheet">  
-
-    <!-- Font Awesome -->
     <link href="{% static 'css/2.css' %}" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
     <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
     <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'css/star_rating_style.css' %}" rel="stylesheet">
-
+    <link href="{% static 'css/style_css_add_to_cart.css' %}" rel="stylesheet">
 
 
 </head>
@@ -43,6 +33,8 @@
             <div class="col-lg-6 text-center text-lg-right"  style="margin-left: auto; ">
                 {% if account == None %}
                 {% else %}
+                <input type="hidden" name="{{ account }}" id="account" hidden/>
+
                 <img src="media/{{ profile_image }}" style=" height:40px; width: 40px; ;  border-radius: 40%; border: none;">
                 {%endif%}
                 
@@ -182,48 +174,19 @@
 
 
 
+                        <div id="container_card" class="btn-group " style="margin-left: 1px;  display: inline-block;">
+                            <button data-toggle="popover" data-content="" type="button" id="my_btn_iframe" style="background-color: transparent; border: none;" >
+                                <div>
+                                <img src="media/static_images/shopping_cart.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;"  style="display: inline-block;">
+                                <h6 id="products_in_card" hidden></h6>                               
+                                </div>
+                    </button>
+                 </div>
+                 <div style="width: 20px;"></div>
 
-                        
-                        
+                          <div class="btn-group " style="margin-left: 1px;  display: inline-block;">
 
-
-
-
-
-
-                     
-                            
-
-
-                        <div class="btn-group" style="margin-left: 1px;  display: inline-block;">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;">
-
-                            <img src="media/static_images/shopping_cart.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;"  style="display: inline-block;">
-                              <!-- Action -->
-                            </button>
-                            <!-- <div class="dropdown-menu" style=" margin-left: 1px; width:fit-content; height:fit-content ;  ">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Separated link</a>
-                            </div> -->
-<!--                           
-
-Data Should Be Disblayed Here
-
- -->
-
-
-
-                          </div>
-
-
-
-
-                          <div class="btn-group" style="margin-left: 1px;  display: inline-block;">
-
-                                <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;" >
+                                <button  class="btn btn-secondary dropdown-toggle" type="button" id="check_out" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;" >
                                      <img src="media/static_images/check_out.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;  background-color: transparent;"> 
                                 </button>
 
@@ -323,8 +286,12 @@ Data Should Be Disblayed Here
         </form>
 </div>  
 
+<div id="message_Add_to_cart">
+
+
+</div>
 <br>
-<br>
+
 
 
      {% for d in data %}
@@ -360,25 +327,25 @@ Data Should Be Disblayed Here
 
                         <div style="display: inline-block; border: 1px">
 
-                        <b style="color: yellowgreen;"><h3>  {{ d.price }} {{ d.currency }} </b> </h3></b>
+                        <b style="color: yellowgreen;"><h3>  <h3 id="price" name="{{ d.price }}">{{ d.price }} {{ d.currency }} </b> </h3></b>
 
                     </div>
                     <p class="mb-4">Bried Description {{ d.brief_description }}</p>
                     <div class="d-flex mb-3" style="float: left;">
-                        <strong class="text-dark mr-3" id="child_sizes">Sizes:</strong>
+                        <strong class="text-dark mr-3" id="checkboxes_sizes">Sizes:</strong>
                         </div>
                         <div class="d-flex mb-3">
                         <form>
                             {% for sizes in d.size_of_clothes %}
                             {% if sizes == "0" %}
                       <script>
-                         element = document.getElementById("child_sizes");
+                         element = document.getElementById("checkboxes_sizes");
                             element.remove();
                       </script>
                       {%  else  %}
-                        <div class="custom-control custom-radio custom-control-inline" style="float: left;">
-                            <input type="radio" class="custom-control-input" id="{{ sizes }}" name="size">
-                            <label class="custom-control-label" for="{{ sizes }}">{{ sizes }}</label>
+                        <div id="checkboxes_sizes" class="custom-control" style="float: left;">
+                            <input type="checkbox"  id="{{ checkboxes_sizes }}" name="{{ sizes }}" >
+                            <label  for="{{ checkboxes_sizes }}">{{ sizes }}</label>
                         </div>
                         {% endif %}
 
@@ -402,7 +369,7 @@ Data Should Be Disblayed Here
                     </form>
                     </div>
                     <div class="d-flex mb-4" style="float: left;">
-                        <strong class="text-dark mr-3" id="child_color"  >Colors:</strong>
+                        <strong class="text-dark mr-3" id="checkboxes_colors"  >Colors:</strong>
                         </div>
                         <div class="d-flex mb-4"  >
 
@@ -411,7 +378,7 @@ Data Should Be Disblayed Here
                             {% if c == "0" %}
 
                             <script>
-                                const element = document.getElementById("child_color");
+                                const element = document.getElementById("checkboxes_colors");
                                 element.remove();
                             </script>
 
@@ -419,9 +386,9 @@ Data Should Be Disblayed Here
 
                             {% else %}
 
-                            <div class="custom-control custom-radio custom-control-inline" style="float: left;">
-                                <input type="radio" class="custom-control-input" id="{{ c }}" name="color">
-                                <label class="custom-control-label" for="{{ c }}" >{{ c }}</label>
+                            <div id="checkboxes_colors"  class="custom-control " style="float: left;">
+                                <input type="checkbox"  id="checkboxes_colors" name="{{ c }}">
+                                <label  for="checkboxes_colors" >{{ c }}</label>
                             </div>
                             {% endif %}
 
@@ -489,7 +456,7 @@ Data Should Be Disblayed Here
 
 
 
-                        <button class="btn btn-outline-primary"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                        <button class="btn btn-outline-primary" id="add_to_cart"><i class="fa fa-shopping-cart mr-1"></i> Add To
                             Cart</button>
                     </div>
 
@@ -951,28 +918,32 @@ Data Should Be Disblayed Here
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><button class="btn btn-outline-primary" style="background-color: white ;"> Up</button></a>
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 
-    <!-- JavaScript Libraries -->
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    
+    <!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+
+    <script src="{% static 'js/bootstrap_old.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script> 
+
+
     <script src="{% static 'lib/easing/easing.min.js' %}"></script>
     <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
 
-    <!-- Contact Javascript File -->
     <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
     <script src="{% static 'mail/contact.js' %}"></script>
 
-    <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
     <script src="{% static 'js/product_counts.js' %}"></script>
     <script src="{% static 'js/star_rating.js' %}"></script>
     <script src="{% static 'js/review_ajax.js' %}"></script>
     <script src="{% static 'js/get_review_ajax.js' %}"></script>
-    <script src="{% static 'js/search_bar_for_mobile.js' %}"></script>
+    <script src="{% static 'js/search_bar_for_mobile.js' %}"></script> 
 
+    <script src="{% static 'js/popper.min.js' %}"></script>
+
+    <script src="{% static 'js/axios.min.js' %}"></script>
+    <script src="{% static 'js/add_to_cart.js' %}"></script>
 
     <script>
 

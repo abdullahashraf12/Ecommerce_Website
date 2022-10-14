@@ -1,0 +1,48 @@
+<html>
+    {% load static %}
+    <head>
+        <title></title>
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    
+    
+    </head>
+    <body style="background-color: aliceblue;">
+        <h6 id="products_count" hidden="true" >{{ count }}</h6>
+        
+        {% for i in data %}
+        <div class="card mb-3" style="width: 100%; ">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="media/{{ i.prod_image }}" width="50px;" height="50px;" class="img-fluid rounded-start">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ i.product_name }}</h5>
+                </div>  
+
+                <div style="display: inline-block; border: 1px">
+
+                <b style="color: yellowgreen;"><h3>  <h3 id="price" name="{{ d.price }}">{{ d.price }} {{ d.currency }} </b> </h3></b>
+
+            </div>
+
+
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+
+
+
+
+
+
+
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+       
+    </body>
+</html>
