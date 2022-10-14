@@ -1,15 +1,14 @@
 function adjustPopover(popover, iframe,res) {
-    var height = iframe.contentWindow.document.body.scrollHeight + 'px';
-    popoverContent = $(popover).next('.popover-content');
+    var height = (Number.parseInt(iframe.contentWindow.document.body.scrollHeight)+100).toString() + 'px';
+    var width=(Number.parseInt(iframe.contentWindow.document.body.scrollWidth)+100).toString() + 'px';
+    iframe.style.width=width;
     iframe.style.height=height;
-    popoverContent.css('height', height);
     iframe.contentWindow.document.open();
     iframe.contentWindow.document.write(res);
     iframe.contentWindow.document.close();
-    iframe.style.height="200px";
     console.log(iframe)
-    console.log("vksjdbvnjkdns")
-    console.log("jnkjnn")
+    console.log(height)
+    console.log(width)
     console.log("sancjknskjajncksa")
     console.log("dsnvijkdnsjlndskljvnsdjknj")
 
@@ -164,17 +163,18 @@ $(document).ready(function() {
                         }
                         var myDefaultWhiteList = $.fn.tooltip.Constructor.Default.whiteList
 
-                        myDefaultWhiteList.iframe = ['style','onload',"contentWindow"]
+                        myDefaultWhiteList.iframe = ['style','onload',"contentWindow","class","width","height"]
 
                         $('#my_btn_iframe').popover({ 
-
+                        
                             title : 'My Checkout',
                             html : true,
                             placement : "bottom",
+                            container: 'body',
                             content: function() {
                             html=response.data.toString()
                                 console.log(html)
-                                return "<iframe style='border:none' onload='adjustPopover(&quot;.pop-bottom&quot; , this , html )'></iframe>";    
+                                return "<iframe style='border:none;'  class='popover' onload='adjustPopover(&quot;.pop-bottom&quot; , this , html )'></iframe>";    
                                
                              }
                          })

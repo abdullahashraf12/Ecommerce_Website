@@ -7,27 +7,24 @@
     
     
     </head>
-    <body style="background-color: aliceblue;">
+    <body style="background-color: aliceblue; width:100px; height: 200px;">
         <h6 id="products_count" hidden="true" >{{ count }}</h6>
-        
+        <div style="height: 10px;"></div>
         {% for i in data %}
-        <div class="card mb-3" style="width: 100%; ">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="media/{{ i.prod_image }}" width="50px;" height="50px;" class="img-fluid rounded-start">
+        <div class="card mb-3" style="border-color: silver;  width:380px; ;height: min-content; ">
+            <div >
+              <div style="float: left;">
+                <img src="media/{{ i.prod_image }}" width="50px;" height="50px;" style="border-color: black;" class="img-fluid rounded-start">
               </div>
-              <div class="col-md-8">
+              <div style="float: left;">
                 <div class="card-body">
                   <h5 class="card-title">{{ i.product_name }}</h5>
+                  <div style="display: inline-block; border: 1px">
+
+                    <b style="color: yellowgreen;"><h3>  <h3 id="price" name="{{ i.product_price }}">{{ i.product_price }} </b> </h3></b>
+    
+                </div>
                 </div>  
-
-                <div style="display: inline-block; border: 1px">
-
-                <b style="color: yellowgreen;"><h3>  <h3 id="price" name="{{ d.price }}">{{ d.price }} {{ d.currency }} </b> </h3></b>
-
-            </div>
-
-
                 </div>
               </div>
             </div>
