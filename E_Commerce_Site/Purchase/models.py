@@ -16,6 +16,7 @@ class Purchased(models.Model):
     product_quantity=models.IntegerField()
     product_price=models.CharField(max_length=200)
     prod_image=models.ImageField(upload_to = "cards/")
+    currency=models.CharField(max_length=25)
     account=models.CharField(max_length=200)
     user_first_name=models.CharField(max_length=200)
     user_second_name=models.CharField(max_length=200)

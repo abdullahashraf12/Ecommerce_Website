@@ -27,8 +27,8 @@ Sizes_clothes= (
 )
 
 currency_type= (
+    ("EGP","EGP"),
     ("$","$"),
-    ("E£","E£"),
 )
 weight_type= (
     ("Gram","Gram"),

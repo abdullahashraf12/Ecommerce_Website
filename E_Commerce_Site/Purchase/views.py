@@ -16,15 +16,17 @@ def add_to_cart(request):
     acc=""
     f_n=""
     l_n=""
-    products=Products.objects.filter(category_name=glob_cat,child_category=child_name,product_name=prod_name).values("img","price","category_name")
+    products=Products.objects.filter(category_name=glob_cat,child_category=child_name,product_name=prod_name).values("img","price","category_name","currency")
     prod_img=""
     price=""
     glob_cat=""
+    currency=""
     print("glob_cat"+str(glob_cat))
     for i in list(products):
         prod_img=dict(i).get("img")
         price=dict(i).get("price")
         glob_cat=dict(i).get("category_name")
+        currency=dict(i).get("currency")
 
     for i in list(account_details):
         acc=dict(i).get("Account")
@@ -33,7 +35,8 @@ def add_to_cart(request):
     card_data_exist=Purchased.objects.filter(account=acc,global_category=glob_cat,sub_category=child_name,product_name=prod_name).values()
     # .update(product_color=color,product_size=size,product_quantity=quantity,product_price=price)
     if(list(card_data_exist)==[]):
-        card_data=Purchased(account=acc,global_category=glob_cat,sub_category=child_name,product_name=prod_name,product_color=color,product_size=size,product_quantity=quantity,product_price=price,user_first_name=f_n,user_second_name=l_n,prod_image=prod_img)
+        card_data=Purchased(account=acc,global_category=glob_cat,sub_category=child_name,product_name=prod_name,product_color=color,product_size=size,product_quantity=quantity,product_price=price,currency=currency,user_first_name=f_n,user_second_name=l_n,prod_image=prod_img)
+        print(currency)
         card_data.save()
     else:
         card_data_exist=Purchased.objects.filter(account=acc,global_category=glob_cat,sub_category=child_name,product_name=prod_name).update(product_color=color,product_size=size,product_quantity=quantity,product_price=price)

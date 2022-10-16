@@ -14,19 +14,26 @@
         <div class="card mb-3" style="border-color: silver;  width:380px; ;height: min-content; ">
             <div >
               <div style="float: left;">
-                <img src="media/{{ i.prod_image }}" width="50px;" height="50px;" style="border-color: black;" class="img-fluid rounded-start">
+                <img src="media/{{ i.prod_image }}" style="border-color: black; width: 75px; height: max-content ;" class="img-fluid rounded-start">
               </div>
-              <div style="float: left;">
-                <div class="card-body">
-                  <h5 class="card-title">{{ i.product_name }}</h5>
-                  <div style="display: inline-block; border: 1px">
+                <div>
+                  <div style="height: 12px;">
+                  </div>
+                  
+                  <div>
+                  <b style="display: inline-block; width: 170px;"><h4 style="display: inline-block; width: max-content;"> {{ i.product_name }}</h4></b>
+                  <h6 style=" display: inline-block;">Price : </h3> 
+                  <h6 id="price" name="{{ i.product_price }}" style="color: yellowgreen; display: inline-block;"> {{ i.product_price }}&nbsp;{{ i.currency }} </h6>
 
-                    <b style="color: yellowgreen;"><h3>  <h3 id="price" name="{{ i.product_price }}">{{ i.product_price }} </b> </h3></b>
+                  </div>
+                  <div style="height: 15px;">
+                  </div>
+
+                  <div>
                     <h6>{% if i.product_color == ""  %} {% else %} Color  {{ i.product_color }} {% endif %} {% if i.product_size == ""  %} {% else %} Size {{ i.product_size }} {% endif %} Quantity {{ i.product_quantity }}</h6>
-                </div>
+                  </div>
                 </div>  
-                </div>
-              </div>
+            </div>
             </div>
             {% endfor %}
           </div>
