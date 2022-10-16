@@ -30,10 +30,16 @@ def add_to_cart(request):
         acc=dict(i).get("Account")
         f_n=dict(i).get("F_Name")
         l_n=dict(i).get("L_Name")
+    card_data_exist=Purchased.objects.filter(account=acc,global_category=glob_cat,sub_category=child_name,product_name=prod_name).values()
+    # .update(product_color=color,product_size=size,product_quantity=quantity,product_price=price)
+    if(list(card_data_exist)==[]):
+        card_data=Purchased(account=acc,global_category=glob_cat,sub_category=child_name,product_name=prod_name,product_color=color,product_size=size,product_quantity=quantity,product_price=price,user_first_name=f_n,user_second_name=l_n,prod_image=prod_img)
+        card_data.save()
+    else:
+        card_data_exist=Purchased.objects.filter(account=acc,global_category=glob_cat,sub_category=child_name,product_name=prod_name).update(product_color=color,product_size=size,product_quantity=quantity,product_price=price)
 
-    card_data=Purchased(account=acc,global_category=glob_cat,sub_category=child_name,product_name=prod_name,product_color=color,product_size=size,product_quantity=quantity,product_price=price,user_first_name=f_n,user_second_name=l_n,prod_image=prod_img)
-    card_data.save()
-    card_data_list=Purchased.objects.filter(account=acc)
+    card_data_list=Purchased.objects.filter(account=acc).order_by("-time_Added")
+    print(card_data_list)
     context={"data":list(card_data_list.values()),"count":card_data_list.count()}
 
     return render(request,"AddToCart.html",context)

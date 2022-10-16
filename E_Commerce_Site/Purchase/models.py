@@ -19,3 +19,4 @@ class Purchased(models.Model):
     account=models.CharField(max_length=200)
     user_first_name=models.CharField(max_length=200)
     user_second_name=models.CharField(max_length=200)
+    time_Added = models.DateTimeField(auto_now_add = True)
