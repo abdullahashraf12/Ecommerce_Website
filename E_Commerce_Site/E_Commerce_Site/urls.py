@@ -23,9 +23,10 @@ from E_Commerce_Site.settings import MEDIA_ROOT,MEDIA_URL
 from django.conf.urls.static import static
 from contact.views import send_message_to_technical_and_managers,normal_view_con_us
 from product_details.views import Product_Detail
-from Purchase.views import add_to_cart
+from Purchase.views import http_res
 prod=Views_pages()
 p_details=Product_Detail()
+http_res_pd=http_res()
 urlpatterns = [
     path('show_quantity',p_details.show_quantity_for_this_product,name="show_quantity"),
     path('',home,name="index"),
@@ -46,7 +47,9 @@ urlpatterns = [
     path('contact_us',send_message_to_technical_and_managers,name="contact_us"),
     path('star',prod.star,name="star_2"),
     path('star/<str:cat_name>/<str:child_name>/<str:prod_name>/',prod.star,name="star"),
-    path("add_to_cart",add_to_cart,name="add_to_cart"),
+    path("add_to_cart",http_res_pd.add_to_cart,name="add_to_cart"),
+    path("get_from_cart",http_res_pd.get_shopping_Cart,name="get_from_cart"),
+
 
 ]
 urlpatterns += static(MEDIA_URL,document_root=MEDIA_ROOT)
