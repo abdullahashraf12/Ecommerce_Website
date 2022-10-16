@@ -127,4 +127,4 @@ axios.post('get_from_cart')
                         console.log(error);
                      }
                 )
-    }, 20);
+    }, 400);
