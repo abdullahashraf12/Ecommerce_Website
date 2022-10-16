@@ -70,6 +70,7 @@ class http_res:
         except:
             print("acc is null")
         if(acc!=None or acc!=""):
+            print(acc)
             card_data_list=Purchased.objects.filter(account=acc).order_by("-time_Added")
             context={"data":list(card_data_list.values()),"count":card_data_list.count()}
             return render(request,"AddToCart.html",context)
