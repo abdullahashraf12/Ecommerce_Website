@@ -307,8 +307,12 @@ class Views_pages:
             #  Color & Size Both Are Null > Then Check Value of Price if it was true or false 
                 if((str(color)=="" or str(color)=="All Color") and ( str(size) == "" or str(size) == "All Size")  ):
                     if((str(price_range) != "All Prices" and str(price_range) != "")):
-                        prices_data_less_than=int(prices.split()[0].replace("$",""))
-                        prices_data_bigger_than=int(prices.split()[2].replace("$",""))   
+                        # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                        # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                        prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                        prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                         my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than).order_by("-time_Added")[:number_of_data_to_show].values())
                         
                         # number_of_products=my_product_.count()

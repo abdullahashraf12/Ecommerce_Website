@@ -245,23 +245,23 @@
                         </div>
                         <div class="form-check">
                             <input type="radio" class="form-check-input"  name="radio_form_1" style="accent-color: green;"  id="price_1">
-                            <label  for="price_1">$0 - $100</label>
+                            <label  for="price_1">0 EGP - 100 EGP</label>
                         </div>
                         <div class="form-check">
                             <input type="radio" class="form-check-input"  name="radio_form_1" style="accent-color: green;"  id="price_2">
-                            <label  for="price_2">$100 - $200</label>
+                            <label  for="price_2">100 EGP- 200 EGP</label>
                         </div>
                         <div class="form-check">
                             <input type="radio" class="form-check-input"  name="radio_form_1" style="accent-color: green;"  id="price_3">
-                            <label  for="price_3">$200 - $300</label>
+                            <label  for="price_3">200 EGP - 300 EGP</label>
                         </div>
                         <div class="form-check">
                             <input type="radio" class="form-check-input"  name="radio_form_1" style="accent-color: green;"  id="price_4">
-                            <label  for="price_4">$300 - $400</label>
+                            <label  for="price_4">300 EGP - 400 EGP</label>
                         </div>
                         <div class="form-check">
                             <input type="radio" class="form-check-input"  name="radio_form_1" style="accent-color: green;"  id="price_5">
-                            <label  for="price_5">$400 - $500</label>
+                            <label  for="price_5">400 EGP - 500 EGP</label>
                         </div>
                     </form>
                 </div>
@@ -425,7 +425,7 @@
                             <p class="card-text">{{ i.brief_description }}</p>
                             <div style="border: 1px; ">
                             <div style="display: inline-block;">
-                            <button type="button" class="btn btn-outline-primary">Add to Cart</button>
+                            <!-- <button type="button" class="btn btn-outline-primary">Add to Cart</button> -->
                         </div>
                             <div style="display: inline-block; border: 1px">
                             <form action="{% url 'detail_product_page' %}" method="POST">
@@ -433,7 +433,7 @@
                                 <input type="hidden" value="{{ i.product_name }}" name="view_product_name"/>
                                 <input type="hidden" value="{{ i.category_name }}" name="view_product_category"/>
                                 <input type="hidden" value="{{ i.child_category }}" name="view_child_category"/>
-                                <button type="submit" class="btn btn-outline-warning">View Product</button>          
+                                <button type="submit" class="btn btn-outline-warning" style="width: 350px;">View Product</button>          
                         </form>
                     </div>
                 </div>
