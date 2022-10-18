@@ -1,5 +1,5 @@
 function adjustPopover_3(popover, iframe,res) {
-    iframe.style.width="400px";
+    iframe.style.width="480px";
     iframe.style.height="250px";
     iframe.contentWindow.document.open();
     iframe.contentWindow.document.write(res);

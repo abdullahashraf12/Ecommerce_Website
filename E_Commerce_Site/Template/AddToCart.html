@@ -7,11 +7,11 @@
         <link href="{% static 'css/trash_for_add_card.css' %}" rel="stylesheet">
     
     </head>
-    <body style="background-color: aliceblue; width:100px; height: 200px;">
+    <body style="background-color: aliceblue; width:450px; height: 200px;">
         <h6 id="products_count" hidden="true" >{{ count }}</h6>
         <div style="height: 10px;"></div>
         {% for i in data %}
-        <div class="card mb-3" style="border-color: silver;  width:380px; ;height: min-content; " id="{{ i.global_category }}&&&&&&&{{ i.sub_category }}*******{{ i.product_name }}">
+        <div class="card mb-3" style="border-color: silver;  width:450px; ;height: min-content; " id="{{ i.global_category }}&&&&&&&{{ i.sub_category }}*******{{ i.product_name }}">
             <div >
               <div style="float: left;">
                 <img src="media/{{ i.prod_image }}" style="border-color: black; width: 75px; height: max-content ;" class="img-fluid rounded-start">
@@ -22,7 +22,7 @@
                   
                   <div>
                   <b style="display: inline-block; width: 170px;"><h4 style="display: inline-block; width: max-content;"> {{ i.product_name }}</h4></b>
-                  <h6 style=" display: inline-block; width: auto;">&nbsp;&nbsp;&nbsp;Price : </h3> 
+                  <h6 style=" display: inline-block; width: auto;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price : </h3> 
 
                   <!-- <h6 style=" display: inline-block; width: auto;">Price : </h3>  -->
                   <h6 id="price" name="{{ i.product_price }}" style="color: yellowgreen; display: inline-block;"> {{ i.product_price }}&nbsp;{{ i.currency }} </h6>

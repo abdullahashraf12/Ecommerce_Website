@@ -1,5 +1,5 @@
 function adjustPopover_1(popover, iframe,res) {
-    iframe.style.width="400px";
+    iframe.style.width="480px";
     iframe.style.height="250px";
     iframe.contentWindow.document.open();
     console.log("1 st time only")
