@@ -4,14 +4,14 @@
         <title></title>
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
-    
+        <link href="{% static 'css/trash_for_add_card.css' %}" rel="stylesheet">
     
     </head>
     <body style="background-color: aliceblue; width:100px; height: 200px;">
         <h6 id="products_count" hidden="true" >{{ count }}</h6>
         <div style="height: 10px;"></div>
         {% for i in data %}
-        <div class="card mb-3" style="border-color: silver;  width:380px; ;height: min-content; ">
+        <div class="card mb-3" style="border-color: silver;  width:380px; ;height: min-content; " id="{{ i.global_category }}&&&&&&&{{ i.sub_category }}*******{{ i.product_name }}">
             <div >
               <div style="float: left;">
                 <img src="media/{{ i.prod_image }}" style="border-color: black; width: 75px; height: max-content ;" class="img-fluid rounded-start">
@@ -28,9 +28,19 @@
                   </div>
                   <div style="height: 15px;">
                   </div>
+                  <div style="float: right;">
+                    <form id="{{ i.global_category }}&&&&&&&{{ i.sub_category }}*******{{ i.product_name }}" action="remove_from_card" method="POST">
+                      {% csrf_token %}
+                      <input value="{{ i.global_category }}" id="{{ i.global_category }}" name="glob_cat" hidden>
+                      <input value="{{ i.sub_category }}" id="{{ i.sub_category }}" name="child_cat" hidden>
+                      <input value="{{ i.product_name }}" id="{{ i.product_name }}" name="prod_Cat" hidden>
 
+                    <button id="{{ i.global_category }}&&&&&&&{{ i.sub_category }}*******{{ i.product_name }}" name="my_btn" class="btn btn-light bouton-image monBouton" >Remove</button>
+                  </form>
+                  </div>
                   <div>
-                    <h6>{% if i.product_color == ""  %} {% else %} Color  {{ i.product_color }} {% endif %} {% if i.product_size == ""  %} {% else %} Size {{ i.product_size }} {% endif %} Quantity {{ i.product_quantity }}</h6>
+                    <h6>{% if i.product_color == ""  %} {% else %} Color  {{ i.product_color }} {% endif %}</h6>
+                    <h6>{% if i.product_size == ""  %} {% else %} Size {{ i.product_size }} {% endif %} Quantity {{ i.product_quantity }}</h6>
                   </div>
                 </div>  
             </div>
@@ -45,8 +55,9 @@
 
 
 
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
-       
+        <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+        <script src="{% static 'js/axios.min.js' %}"></script>
+        <script src="{% static 'js/remove_from_Cart.js' %}"></script>
+
     </body>
 </html>

@@ -93,7 +93,7 @@ class Views_pages:
                 F_Name = request.session.get('F_Name')
                 L_Name = request.session.get('L_Name')
                 profile_image = request.session.get('p_img')
-                context={"context":context_Data,"count":context_Data.count(),"categories":list_just_names,"account":my_acc,"F_Name":F_Name,"L_Name":L_Name,"profile_image":profile_image,"data_from_data_product_name":data_from_search,"product_count":context_Data.count(),"cmp_det" : comp_details,"no_of_pages":range(1,final_number_of_pages+1),"searched_data":final_number_of_pages}
+                context={"context":context_Data,"count":context_Data.count(),"categories":list_just_names,"account":my_acc,"F_Name":F_Name,"L_Name":L_Name,"profile_image":profile_image,"data_from_data_product_name":data_from_search,"product_count":context_Data.count(),"cmp_det" : comp_details,"no_of_pages":range(1,final_number_of_pages+1),"searched_data":final_number_of_pages}  # type: ignore
                 print(categories_list)
                 
                 self.set_data_from_Search_bar(context)
@@ -362,14 +362,22 @@ class Views_pages:
                         my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),color=0).order_by("-time_Added")[:number_of_data_to_show].values())
                         return JsonResponse(my_product_,safe=False)
                 elif((str(size)=="" or str(size)=="All Size") and (str(price_range) != "All Prices" or str(price_range) != "") and (str(color)!="" or str(color)!="All Color")):                    
-                        prices_data_less_than=int(prices.split()[0].replace("$",""))
-                        prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                                # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                        # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                        prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                        prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                         my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,color__icontains=str(color)).order_by("-time_Added")[:number_of_data_to_show].values())
                         return JsonResponse(my_product_,safe=False)
                 #  Color & Size Both Are Null > Then Check Value of Price if it was true or false 
                 if((str(color)=="" or str(color)=="All Color") and ( str(size) == "" or str(size) == "All Size") and (str(price_range) == "All Prices" or str(price_range) == "")  ):
-                    prices_data_less_than=int(prices.split()[0].replace("$",""))
-                    prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                    # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                    # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                    prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                    prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                     my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),color__icontains=str(color),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,size_of_clothes__icontains=str(size)).order_by("-time_Added")[:number_of_data_to_show].values())
                     print("price_range "+str(price_range))
                     print("color "+str(color))
@@ -382,8 +390,12 @@ class Views_pages:
                     print("size "+str(size))
                     return JsonResponse(my_product_,safe=False)
                 if((str(color)=="" or str(color)=="All Color") and ( str(size) != "" or str(size) != "All Size") and (str(price_range) != "All Prices" or str(price_range) != "")  ):
-                    prices_data_less_than=int(prices.split()[0].replace("$",""))
-                    prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                    # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                    # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                    prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                    prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                     my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,size_of_clothes__icontains=str(size)).order_by("-time_Added")[:number_of_data_to_show].values())
                     print(my_product_)
                     print("price_range "+str(price_range))
@@ -391,8 +403,12 @@ class Views_pages:
                     print("size "+str(size))
                     return JsonResponse(my_product_,safe=False)
                 if((str(color)!="" or str(color)!="All Color") and ( str(size) != "" or str(size) != "All Size") and (str(price_range) != "All Prices" or str(price_range) != "")  ):
-                    prices_data_less_than=int(prices.split()[0].replace("$",""))
-                    prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                    # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                    # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                    prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                    prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                     my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,color__icontains=str(color),size_of_clothes__icontains=str(size)).order_by("-time_Added")[:number_of_data_to_show].values())
                     print(my_product_)
                     print("price_range "+str(price_range))
@@ -413,8 +429,12 @@ class Views_pages:
             #  Color & Size Both Are Null > Then Check Value of Price if it was true or false 
                 if((str(color)=="" or str(color)=="All Color") and ( str(size) == "" or str(size) == "All Size")  ):
                     if((str(price_range) != "All Prices" and str(price_range) != "")):
-                        prices_data_less_than=int(prices.split()[0].replace("$",""))
-                        prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                        # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                        # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                        prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                        prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                         my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,category_name="Featured Products")[:number_of_data_to_show].values())
                         print("price_range "+str(price_range))
                         print("color "+str(color))
@@ -440,14 +460,22 @@ class Views_pages:
                         my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),color=0,category_name="Featured Products")[:number_of_data_to_show].values())
                         return JsonResponse(my_product_,safe=False)
                 elif((str(size)=="" or str(size)=="All Size") and (str(price_range) != "All Prices" or str(price_range) != "") and (str(color)!="" or str(color)!="All Color")):                    
-                        prices_data_less_than=int(prices.split()[0].replace("$",""))
-                        prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                        # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                        # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                        prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                        prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                         my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,color__icontains=str(color),category_name="Featured Products")[:number_of_data_to_show].values())
                         return JsonResponse(my_product_,safe=False)
                 #  Color & Size Both Are Null > Then Check Value of Price if it was true or false 
                 if((str(color)=="" or str(color)=="All Color") and ( str(size) == "" or str(size) == "All Size") and (str(price_range) == "All Prices" or str(price_range) == "")  ):
-                    prices_data_less_than=int(prices.split()[0].replace("$",""))
-                    prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                    # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                    # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                    prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                    prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                     my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),color__icontains=str(color),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,size_of_clothes__icontains=str(size),category_name="Featured Products")[:number_of_data_to_show].values())
                     print("price_range "+str(price_range))
                     print("color "+str(color))
@@ -460,8 +488,12 @@ class Views_pages:
                     print("size "+str(size))
                     return JsonResponse(my_product_,safe=False)
                 if((str(color)=="" or str(color)=="All Color") and ( str(size) != "" or str(size) != "All Size") and (str(price_range) != "All Prices" or str(price_range) != "")  ):
-                    prices_data_less_than=int(prices.split()[0].replace("$",""))
-                    prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                    # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                    # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                    prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                    prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                     my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,size_of_clothes__icontains=str(size),category_name="Featured Products")[:number_of_data_to_show].values())
                     print(my_product_)
                     print("price_range "+str(price_range))
@@ -469,8 +501,12 @@ class Views_pages:
                     print("size "+str(size))
                     return JsonResponse(my_product_,safe=False)
                 if((str(color)!="" or str(color)!="All Color") and ( str(size) != "" or str(size) != "All Size") and (str(price_range) != "All Prices" or str(price_range) != "")  ):
-                    prices_data_less_than=int(prices.split()[0].replace("$",""))
-                    prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                    # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                    # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                    prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                    prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                     my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,color__icontains=str(color),size_of_clothes__icontains=str(size),category_name="Featured Products")[:number_of_data_to_show].values())
                     print(my_product_)
                     print("price_range "+str(price_range))
@@ -492,8 +528,12 @@ class Views_pages:
                  #  Color & Size Both Are Null > Then Check Value of Price if it was true or false 
                 if((str(color)=="" or str(color)=="All Color") and ( str(size) == "" or str(size) == "All Size")  ):
                     if((str(price_range) != "All Prices" and str(price_range) != "")):
-                        prices_data_less_than=int(prices.split()[0].replace("$",""))
-                        prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                        # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                        # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                        prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                        prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                         my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than).order_by("-Number_of_review")[:number_of_data_to_show].values())
                         print("price_range "+str(price_range))
                         print("color "+str(color))
@@ -519,14 +559,22 @@ class Views_pages:
                         my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),color=0).order_by("-Number_of_review")[:number_of_data_to_show].values())
                         return JsonResponse(my_product_,safe=False)
                 elif((str(size)=="" or str(size)=="All Size") and (str(price_range) != "All Prices" or str(price_range) != "") and (str(color)!="" or str(color)!="All Color")):                    
-                        prices_data_less_than=int(prices.split()[0].replace("$",""))
-                        prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                        # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                        # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                        prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                        prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                         my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,color__icontains=str(color)).order_by("-Number_of_review")[:number_of_data_to_show].values())
                         return JsonResponse(my_product_,safe=False)
                 #  Color & Size Both Are Null > Then Check Value of Price if it was true or false 
                 if((str(color)=="" or str(color)=="All Color") and ( str(size) == "" or str(size) == "All Size") and (str(price_range) == "All Prices" or str(price_range) == "")  ):
-                    prices_data_less_than=int(prices.split()[0].replace("$",""))
-                    prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                    # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                    # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                    prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                    prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                     my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),color__icontains=str(color),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,size_of_clothes__icontains=str(size)).order_by("-Number_of_review")[:number_of_data_to_show].values())
                     print("price_range "+str(price_range))
                     print("color "+str(color))
@@ -539,8 +587,12 @@ class Views_pages:
                     print("size "+str(size))
                     return JsonResponse(my_product_,safe=False)
                 if((str(color)=="" or str(color)=="All Color") and ( str(size) != "" or str(size) != "All Size") and (str(price_range) != "All Prices" or str(price_range) != "")  ):
-                    prices_data_less_than=int(prices.split()[0].replace("$",""))
-                    prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                    # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                    # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                    prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                    prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                     my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,size_of_clothes__icontains=str(size)).order_by("-Number_of_review")[:number_of_data_to_show].values())
                     print(my_product_)
                     print("price_range "+str(price_range))
@@ -548,8 +600,12 @@ class Views_pages:
                     print("size "+str(size))
                     return JsonResponse(my_product_,safe=False)
                 if((str(color)!="" or str(color)!="All Color") and ( str(size) != "" or str(size) != "All Size") and (str(price_range) != "All Prices" or str(price_range) != "")  ):
-                    prices_data_less_than=int(prices.split()[0].replace("$",""))
-                    prices_data_bigger_than=int(prices.split()[2].replace("$",""))
+                    # prices_data_less_than=int(prices.split()[0].replace(" EGP ",""))
+                    # prices_data_bigger_than=int(prices.split()[2].replace(" EGP ",""))
+
+                    prices_data_less_than=int(str(prices.split("  and  ")[0]).replace(" EGP",""))
+                    prices_data_bigger_than=int(str(prices.split("  and  ")[1]).replace(" EGP",""))
+
                     my_product_=list(Products.objects.filter(product_name__icontains=str(get_data_from_client_by_search),price__lte=prices_data_bigger_than,price__gte=prices_data_less_than,color__icontains=str(color),size_of_clothes__icontains=str(size)).order_by("-Number_of_review")[:number_of_data_to_show].values())
                     print(my_product_)
                     print("price_range "+str(price_range))

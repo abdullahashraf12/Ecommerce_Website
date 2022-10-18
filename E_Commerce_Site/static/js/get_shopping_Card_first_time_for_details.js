@@ -1,11 +1,12 @@
-function adjustPopover_2(popover, iframe,res) {
-
+function adjustPopover_1(popover, iframe,res) {
     iframe.style.width="400px";
     iframe.style.height="250px";
     iframe.contentWindow.document.open();
+    console.log("1 st time only")
+    console.log(res)
     iframe.contentWindow.document.write(res);
     iframe.contentWindow.document.close();
-
+    console.log("1 st time only")
 
 }
 
@@ -25,22 +26,11 @@ data_to_cart={
 };
 
 
-// setInterval(function (){
-            data_to_cart={
-        
-            url_html:"",
-     
-            set set_url_html(html){
-                this.url_html=html
-            },
-            get get_url_html() {
-                return this.url_html;
-    
-            
-        }
-    }
 
-axios.post('get_from_cart')
+$(document).ready(function(e){
+    const sendGetRequest = async () => {
+
+ await axios.get('get_from_cart')
                   .then((response) => {
                     products_count = $($.parseHTML(response.data)).filter("#products_count").html();
                     data_to_cart.set_url_html=response.data
@@ -70,9 +60,9 @@ axios.post('get_from_cart')
                 myDefaultWhiteList.iframe = ['style','src','id','onload',"contentWindow","class","width","height"]
                 console.log(response.data.toString())
 
-                 html=response.data.toString()
+                 html=response.data
                 console.log(data_to_cart.get_url_html)
-                return "<iframe id='my_iframe' style='border:none;'  class='popover' onload='adjustPopover_2(&quot;.pop-bottom&quot; , this , data_to_cart.get_url_html )'></iframe>";    
+                return "<iframe id='my_iframe' style='border:none;'  class='popover' onload='adjustPopover_1(&quot;.pop-bottom&quot; , this , data_to_cart.get_url_html )'></iframe>";    
 
                    }})
 
@@ -82,4 +72,11 @@ axios.post('get_from_cart')
                         console.log(error);
                      }
                 )
-    // }, 400);
+                    
+            
+            
+            }
+
+
+            sendGetRequest();
+            })

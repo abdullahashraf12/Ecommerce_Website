@@ -1,4 +1,34 @@
-// setInterval(function (){
+function adjustPopover_3(popover, iframe,res) {
+    iframe.style.width="400px";
+    iframe.style.height="250px";
+    iframe.contentWindow.document.open();
+    iframe.contentWindow.document.write(res);
+    iframe.contentWindow.document.close();
+    console.log("index")
+    console.log("index")
+    console.log("index")
+    console.log("index")
+
+
+}
+
+
+   
+   
+   $(document).ready(function(){
+
+
+    
+
+
+
+
+    setInterval(function(){
+
+
+
+
+
     data_to_cart={
     glob_cate:"",
     child_cat:"",
@@ -64,11 +94,17 @@ axios.post('get_from_cart')
                 $("#products_in_card").html(products_count)
                 $("#my_btn_iframe").attr("disabled", false);
 
+                // $("#my_btn_iframe").popover('show')
+
+
 
             }else{
                 $("#products_in_card").attr("class","")
                 $("#products_in_card").attr("hidden",true);
                 $("#my_btn_iframe").attr("disabled", true);
+                $("#my_btn_iframe").popover('hide')
+
+
             }
 
             $('#my_btn_iframe').popover({ 
@@ -85,7 +121,7 @@ axios.post('get_from_cart')
 
          html=response.data.toString()
         console.log(data_to_cart.get_url_html)
-        return "<iframe id='my_iframe' style='border:none;'  class='popover' onload='adjustPopover(&quot;.pop-bottom&quot; , this , data_to_cart.get_url_html )'></iframe>";    
+        return "<iframe id='my_iframe' style='border:none;'  class='popover' onload='adjustPopover_3(&quot;.pop-bottom&quot; , this , data_to_cart.get_url_html )'></iframe>";    
 
            }})
 
@@ -95,4 +131,7 @@ axios.post('get_from_cart')
                 console.log(error);
              }
         )
-// }, 400);
+
+
+            },500)
+    })

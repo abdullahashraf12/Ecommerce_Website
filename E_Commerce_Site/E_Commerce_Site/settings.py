@@ -59,10 +59,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'E_Commerce_Site.urls'
-
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

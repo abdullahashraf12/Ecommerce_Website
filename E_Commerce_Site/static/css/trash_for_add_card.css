@@ -1,0 +1,18 @@
+
+
+.bouton-image:before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: text-top;
+    background-color: transparent;
+    background-position : center center;
+    background-repeat:no-repeat;
+}
+
+.monBouton:before{
+     background-image : url(../img/trash.png);
+     
+}

@@ -1,19 +1,18 @@
 function adjustPopover(popover, iframe,res) {
-    var height = (Number.parseInt(iframe.contentWindow.document.body.scrollHeight)+100).toString() + 'px';
-    var width=(Number.parseInt(iframe.contentWindow.document.body.scrollWidth)+100).toString() + 'px';
-    iframe.style.width=width;
-    iframe.style.height=height;
+
+    iframe.style.width="400px";
+    iframe.style.height="250px";
     iframe.contentWindow.document.open();
     iframe.contentWindow.document.write(res);
     iframe.contentWindow.document.close();
-    console.log(iframe)
-    console.log(height)
-    console.log(width)
-    console.log("sancjknskjajncksa")
-    console.log("dsnvijkdnsjlndskljvnsdjknj")
-
+    console.log("add to card")
+    console.log("add to card")
+    console.log("add to card")
+    console.log("add to card")
 }
 
+
+    
 
 
 $(document).ready(function() {
@@ -21,24 +20,7 @@ $(document).ready(function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
     setInterval(function(){
-
-
-
 
         data_to_cart={
         
@@ -54,7 +36,11 @@ $(document).ready(function() {
         }
     }
 
-axios.post('get_from_cart')
+
+
+
+    
+axios.get('get_from_cart')
                   .then((response) => {
                     products_count = $($.parseHTML(response.data)).filter("#products_count").html();
                     data_to_cart.set_url_html=response.data
@@ -65,13 +51,26 @@ axios.post('get_from_cart')
                         $("#products_in_card").html(products_count)
                         $("#my_btn_iframe").attr("disabled", false);
 
+                        // $("#my_btn_iframe").popover('show')
+
+
 
                     }else{
                         $("#products_in_card").attr("class","")
                         $("#products_in_card").attr("hidden",true);
                         $("#my_btn_iframe").attr("disabled", true);
+                        $("#my_btn_iframe").popover('hide')
+
+
                     }
 
+                }).catch((error) => {
+                                console.log(error);
+                                }
+                        )
+                            
+                            
+        
                     $('#my_btn_iframe').popover({ 
                         
                         title : 'My Checkout',
@@ -81,28 +80,30 @@ axios.post('get_from_cart')
                         
             content: function() {
                 var myDefaultWhiteList = $.fn.tooltip.Constructor.Default.whiteList
-                myDefaultWhiteList.iframe = ['style','src','id','onload',"contentWindow","class","width","height"]
-                console.log(response.data.toString())
+                myDefaultWhiteList.iframe = ['style','src','id','onload',"contentWindow","class","width","height","contentDocument"]
 
-                 html=response.data.toString()
+                // html=response.data
                 console.log(data_to_cart.get_url_html)
+             
+             
+             
+             
+             
+//                 // document.getElementById('my_iframe').contentDocument.location.reload(true);
+
+             
+             
+             
+             
                 return "<iframe id='my_iframe' style='border:none;'  class='popover' onload='adjustPopover(&quot;.pop-bottom&quot; , this , data_to_cart.get_url_html )'></iframe>";    
 
-                   }})
+                   }}
+                   )
 
               
-                }).catch(
-                (error) => {
-                        console.log(error);
-                     }
-                )
+                
 
-
-
-
-
-
-    },400)
+            },500)
 
 
 
@@ -221,7 +222,7 @@ axios.post('get_from_cart')
                         $("#message_Add_to_cart").empty()
                     }
                     setTimeout(clear_my_func,4000)
-                    
+                 
 
 
 
@@ -250,10 +251,12 @@ axios.post('get_from_cart')
                         $("#products_in_card").attr("class","word")
                         $("#products_in_card").attr("hidden",false)
                         $("#products_in_card").html(products_count)
-
+                        document.getElementById('my_iframe').contentWindow.location.reload();
+                        
                     }else{
                         $("#products_in_card").attr("class","")
                         $("#products_in_card").attr("hidden",true);
+                        
                     }
 
                     $('#my_btn_iframe').popover({ 
@@ -266,9 +269,8 @@ axios.post('get_from_cart')
             content: function() {
                 var myDefaultWhiteList = $.fn.tooltip.Constructor.Default.whiteList
                 myDefaultWhiteList.iframe = ['style','src','id','onload',"contentWindow","class","width","height"]
-                console.log(response.data.toString())
 
-                 html=response.data.toString()
+                //  html=response.data.toString()
                 console.log(data_to_cart.get_url_html)
                 return "<iframe id='my_iframe' style='border:none;'  class='popover' onload='adjustPopover(&quot;.pop-bottom&quot; , this , data_to_cart.get_url_html )'></iframe>";    
 
@@ -280,26 +282,5 @@ axios.post('get_from_cart')
                         console.log(error);
                      }
                 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-                    }}})})
+                    }}})
+                })

@@ -1,4 +1,3 @@
-import re
 from django.http import HttpResponse
 from django.shortcuts import render
 from matplotlib.style import context
@@ -6,6 +5,8 @@ from .models import Purchased
 from accounts.models import Accounts
 from products.models import Products
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.http import JsonResponse
 
 # Create your views here.
 class http_res:
@@ -17,7 +18,7 @@ class http_res:
         return self._http_response
 
 
-
+    @xframe_options_exempt
     def add_to_cart(self,request):
         account=request.POST.get("account")
         glob_cat=request.POST.get("cat_name")
@@ -76,3 +77,14 @@ class http_res:
             return render(request,"AddToCart.html",context)
         else:
             return HttpResponse("")
+
+    @xframe_options_exempt
+    def remove_from_card(self,request):
+        if(request.method=="POST"):
+            glob_cat=request.POST.get("glob_cat")
+            child_cat=request.POST.get("child_cat")
+            prod_cat=request.POST.get("prod_Cat")
+            acc=request.session['Account']
+            instance_purchased=Purchased.objects.filter(global_category=glob_cat,sub_category=child_cat,product_name=prod_cat,account=acc)
+            instance_purchased.delete()
+            return JsonResponse({"success":"success"},safe=False)
