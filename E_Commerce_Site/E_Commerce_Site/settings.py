@@ -13,24 +13,14 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR_db = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-44oa!0!3!itm3yvoec9%@l3ouh2j8oib%qzmi2a%1@9&2wys(-'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.2',"192.168.1.4","127.0.0.1","192.168.1.3","192.168.1.11","156.214.100.213","4676-156-214-100-213.eu.ngrok.io","192.168.1.8","192.168.1.6","192.168.1.9","102.42.145.166","192.168.1.5","192.168.1.7","154.176.30.233"]
-
-
-# Application definition
+ALLOWED_HOSTS = ['192.168.1.2',"192.168.1.4","127.0.0.1","192.168.1.3","192.168.1.11","156.214.100.213","4676-156-214-100-213.eu.ngrok.io","192.168.1.8","192.168.1.6","192.168.1.9","102.42.145.166","192.168.1.5","192.168.1.7","154.176.30.233","41.239.110.203","192.168.137.155"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -48,7 +38,6 @@ INSTALLED_APPS = [
     "product_details",
     "multiselectfield",
     "Purchase",
-
 ]
 
 MIDDLEWARE = [

@@ -71,7 +71,7 @@ class Views_pages:
             searching_for=request.POST.get("Searching_for")
             default_count=10
             if(data_from_search!=None and searching_for==None):
-                context_Data=Products.objects.filter(product_name__icontains=data_from_search)
+                context_Data=Products.objects.filter(product_name__icontains=data_from_search).exclude(category_name="Featured Products")
                 categories_list=global_category.objects.all()
                 cat_list=list(categories_list.values("category"))
                 list_just_names=[]
@@ -105,7 +105,7 @@ class Views_pages:
             else:
                 comp_details=Company_Details.objects.values("Address","E_Mail","Company_Number")
 
-                context_Data=Products.objects.filter(product_name__icontains=searching_for)
+                context_Data=Products.objects.filter(product_name__icontains=searching_for).exclude(category_name="Featured Products")
                 categories_list=global_category.objects.all()
                 cat_list=list(categories_list.values("category"))
                 list_just_names=[]
