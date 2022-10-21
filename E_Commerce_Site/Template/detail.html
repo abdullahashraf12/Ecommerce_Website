@@ -231,17 +231,81 @@
 
 
 
-     {% for d in data %}
-   
-
-
-    
+     {% for d in data %} 
     <div class="container-fluid pb-5">
-        <div class="row px-xl-5" id="gh" style="max-width:100%; max-height:80%;">
-            <div class="col-lg-5 mb-30" style="max-width:100%; max-height:80%;">
-            <img class="w-100 h-100" src="media/{{ d.img }}" style="object-fit: contain;" alt="Image">
+        <div>
+           <div style="float: left;">
+
+                {% if d.main_img != "" %}
+                <div style="width:60px; clear:both;">
+                    <button style="width:57px; border-color: transparent; background-color: transparent; " id="img_1_button">
+                <img style="height: 50px; width: 47px;" src="media/{{ d.main_img }}" id="img_1">
+            </button>
             </div>
-            <div class="col-lg-7 h-auto mb-30">
+                {% endif %}
+                <div style="width:57px; clear:both;">
+                    <button style="width:57px; border-color: transparent; background-color: transparent; " id="img_2_button">
+        
+                {% if d.img_list_1 != "" %}
+                <img style="height: 50px; width: 47px;" src="media/{{ d.img_list_1 }}" id="img_2">
+                </button>
+            </div>
+        
+                {% endif %}
+                {% if d.img_list_2 != "" %}
+                <div style="width:57px; clear:both;">
+        
+                <button style="width:57px; border-color: transparent; background-color: 
+                transparent; " id="img_3_button">
+        
+                <img style="height: 50px; width: 47px;" src="media/{{ d.img_list_2 }}"  id="img_3">
+        
+                </button>
+            </div>
+        
+                {% endif %}
+        
+                {% if d.img_list_3 != "" %}
+                
+                <div style="width:57px; clear:both;">
+                    <button style="width:57px; border-color: transparent; background-color: 
+                    transparent; " id="img_4_button">
+                <img style="height: 50px; width: 47px;" src="media/{{ d.img_list_3 }}"  id="img_4">
+            </button>
+        
+            </div>
+        
+                {% endif %}
+        
+                {% if d.img_list_4 != "" %}
+             
+                <div style="width:57px; clear:both;">
+                    <button style="width:57px; border-color: transparent; background-color: 
+                    transparent; " id="img_5_button">
+                <img style="height: 50px; width: 47px;" src="media/{{ d.img_list_4 }}"  id="img_5">
+            </button>
+        
+            </div>
+        
+                {% endif %}
+        
+                {% if d.img_list_5 != "" %}
+                
+                <div  style="width:57px; clear:both;">
+                    <button style="width:57px; border-color: transparent; background-color: 
+                    transparent; " id="img_6_button">
+                <img style="height: 50px; width: 47px;" src="media/{{ d.img_list_5 }}"  id="img_6">
+            </button>
+            </div>
+            
+            {% endif %}
+            </div>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col-lg-5 mb-30" style="max-width:100%; max-height:80%; float: left;">
+            <img class="w-100 h-100" id="main_img" src="media/{{ d.main_img }}" style="object-fit: contain;" alt="Image">
+            </div>
+            <div style="float:left; width: 50%">
                 <div class="h-100 bg-light p-30">
                     <h3 id="prod_name_global" name="prod_name_global">{{ d.product_name }}</h3>
                     <div class="d-flex mb-3">
@@ -455,6 +519,9 @@
                 </div>
             </div>
         </div>
+        
+    
+    </div>
 
         <div class="row px-xl-5">
             <div class="col">
@@ -669,7 +736,7 @@
                                 <input type="hidden" value="{{ i.child_category }}" name="view_child_category_3"/>
                                 <button type="submit" style="border: transparent;; width: 100%; height:300px; border-color: transparent; background: transparent; background-color:transparent ; ">
 
-                          <img class="card-img-top zoom" src="/media/{{ i.img }}" style="width: 100%; height:300px; " alt="Card image cap">
+                          <img class="card-img-top zoom" src="/media/{{ i.main_img }}" style="width: 100%; height:300px; " alt="Card image cap">
                           </button>
                           </form>
 
@@ -861,7 +928,8 @@
     <a href="#" class="btn btn-primary back-to-top"><button class="btn btn-outline-primary" style="background-color: white ;"> Up</button></a>
 
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    
+    <script src="{% static 'js/multi_img_details_page.js' %}"></script>
+
     <!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
 
     <script src="{% static 'js/bootstrap_old.js' %}"></script>

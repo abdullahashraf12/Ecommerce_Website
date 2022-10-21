@@ -38,7 +38,7 @@ def home(request):
     # recent_products_added
     print(sponser.objects.all())
     print(Products.objects.filter(category_name="Featured Products"))
-    r_p=Products.objects.values("category_name","child_category","product_name","price","currency","time_Added","brief_description","img").order_by('-time_Added')[:8]
+    r_p=Products.objects.values("category_name","child_category","product_name","price","currency","time_Added","brief_description","main_img").order_by('-time_Added')[:8]
     comp_details=Company_Details.objects.values("Address","E_Mail","Company_Number")
     lots_sponser=Lots_Sponser.objects.all().values("img_sp")
     sponser_lots_is_null=0

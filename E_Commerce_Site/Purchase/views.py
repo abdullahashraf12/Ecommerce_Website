@@ -31,14 +31,14 @@ class http_res:
         acc=""
         f_n=""
         l_n=""
-        products=Products.objects.filter(category_name=glob_cat,child_category=child_name,product_name=prod_name).values("img","price","category_name","currency")
+        products=Products.objects.filter(category_name=glob_cat,child_category=child_name,product_name=prod_name).values("main_img","price","category_name","currency")
         prod_img=""
         price=""
         glob_cat=""
         currency=""
         print("glob_cat"+str(glob_cat))
         for i in list(products):
-            prod_img=dict(i).get("img")
+            prod_img=dict(i).get("main_img")
             price=dict(i).get("price")
             glob_cat=dict(i).get("category_name")
             currency=dict(i).get("currency")
