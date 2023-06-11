@@ -1,0 +1,24 @@
+<div class="col-lg-4 col-md-6 col-sm-6 pb-1" >
+    <div class="card-group"   >
+        <div class="card"  style="width: fit-content; height: min-content;  " >
+            <div style="width: fit-content; height: min-content;  ">
+          <img class="card-img-top" src="/media/{{ i.img }}" style="width:fit-content; height:140px;  " alt="Card image cap">
+        </div>
+          <div class="card-body">
+            <h5 class="card-title"> {{ i.product_name }} </h5>
+            <h6 class="card-title"> <b>Price</b> <b style="color: yellowgreen;"> {{ i.price }} {{ i.currency  }}</b> </b></h6>
+            <p class="card-text">{{ i.brief_description }}</p>
+            <div style="border: 1px; ">
+            <div style="display: inline-block;">
+            <button type="button" class="btn btn-outline-primary">Buy Now</button>
+        </div>
+            <div style="display: inline-block; border: 1px">
+            <form action="{% url 'detail_product_page' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{ i.product_name }}" name="view_product_name"/>
+                <input type="hidden" value="{{ i.category_name }}" name="view_product_category"/>
+                <input type="hidden" value="{{ i.child_category }}" name="view_child_category"/>
+                <button type="submit" class="btn btn-outline-warning">View Product</button>          
+        </form>
+    </div>
+</div>

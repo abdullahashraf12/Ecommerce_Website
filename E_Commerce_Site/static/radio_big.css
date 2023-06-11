@@ -1,0 +1,33 @@
+input[type=radio] {
+    display: none;
+}
+input[type=radio] + label::before {
+    content: '';
+    display: inline-block;
+    border: transparent;
+    border-radius: 50%;
+    margin: 0 0.5em;
+}
+input[type=radio]:checked + label::before {
+    background-color: transparent;
+}
+
+.radio1 + label::before {
+    width: 0.5em;
+    height: 0.5em;
+}
+
+.radio2 + label::before {
+    width: 0.75em;
+    height: 0.75em;
+}
+
+.radio3 + label::before {
+    width: 1em;
+    height: 1em;
+}
+
+.radio4 + label::before {
+    width: 1.5em;
+    height: 1.5em;
+}

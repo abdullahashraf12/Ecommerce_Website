@@ -1,0 +1,11 @@
+.popover {
+    max-width: 500px;
+    max-height: 500px;
+    right: 10px;
+}
+
+
+.body{
+    max-width: 1000px;
+    max-height: 3000px;
+}

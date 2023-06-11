@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+{% load static %}
+    
+    <head>
+    <meta charset="utf-8">
+    <title>H1Market</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <link rel="icon" href="{% static 'img/favjpg.jpg' %}" >
+    <link href="{% static 'css/1.css' %}" rel="stylesheet">  
+    <link href="{% static 'css/2.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/star_rating_style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style_css_add_to_cart.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/popover.css' %}" rel="stylesheet">
+
+</head>
+
+<body style="width: 100%;">
+ 
+
+    <div class="container-fluid">
+        <div >
+            
+            <div class="col-lg-6 text-center text-lg-right"  style="margin-left: auto; ">
+                {% if account == None %}
+                {% else %}
+                <input type="hidden" name="{{ account }}" id="account" hidden/>
+
+                <img src="media/{{ profile_image }}" style=" height:40px; width: 40px; ;  border-radius: 40%; border: none;">
+                {%endif%}
+                
+
+                <div class="d-inline-flex align-items-center">
+
+                    <div class="btn-group">
+                        
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                        <div class="dropdown-menu dropdown-menu-right" style="width: 180px;">
+                            {% if account == None %}
+
+                            <a class="text-body mr-3" href="{% url 'sign_in' %}">&nbsp;&nbsp;&nbsp;Sign In&nbsp;&nbsp;</a>
+                            <a class="text-body mr-3" href="{% url 'sign_up' %}">&nbsp;&nbsp;Sign Up&nbsp;</a>
+                            {% else %}
+                            <a class="text-body mr-3" href="{% url 'Logout' %}">Logout</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+
+                    
+                </div>
+                
+                <!-- <div class="btn-group mx-2">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">EUR</button>
+                            <button class="dropdown-item" type="button">GBP</button>
+                            <button class="dropdown-item" type="button">CAD</button>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">FR</button>
+                            <button class="dropdown-item" type="button">AR</button>
+                            <button class="dropdown-item" type="button">RU</button>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <div class="d-inline-flex align-items-center d-block d-lg-none">
+                    <a href="" class="btn px-0 ml-2">
+                        <i class="fas fa-heart text-dark"></i>
+                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    </a>
+                    <a href="" class="btn px-0 ml-2">
+                        <i class="fas fa-shopping-cart text-dark"></i>
+                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+            <div class="col-lg-4">
+                <a href="{% url 'index' %}" class="text-decoration-none" >
+                    <span class="h1 text-uppercase bg-light px-2" style="border-color:black; color: black;">H1</span>
+                                <span class="h1  bg-primary px-2 ml-n1" style="filter: invert(1); color:white ;">Market</span>
+                        </a>
+            </div>
+            <div id="remove_for_mobile"  class="col-lg-4 col-6 text-left" style="width: max-content;">
+                <form action="{% url 'all' %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="input-group">
+                        <input type="text" class="form-control"  style="width: max-content; " name="search_textfield" id="search_textfield"    placeholder="Search For Products">   
+                        <button type="submit"  style="width: max-content; filter: invert(1);"  class="btn btn-outline-primary" >Search</button>           
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="col-lg-4 col-6 text-right">
+                <p class="m-0">Customer Service</p>
+                <h5 class="m-0">+012 345 6789</h5>
+            </div> -->
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-dark mb-30" style="background-color: black;">
+        <div class="row px-xl-5" style="background-color: black;">
+            <div class="col-lg-3 d-none d-lg-block" style="background-color: black;">
+                <a data-toggle="collapse" href="#navbar-vertical" style="height: 60px; padding: 0 30px; ">
+                    <h6 style="color: aqua; width:max-content ;">Categories</h6>
+                    <!-- <i class="fa fa-angle-down text-dark"></i> -->
+                </a>
+                <!-- <div class="nav-item dropdown dropright">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ key }} <i class="fa fa-angle-right float-right mt-1"></i></a>
+                            <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                                <a href="" class="dropdown-item">{{ value }}</a> 
+                                 -->
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                    <div class="navbar-nav w-100">
+                    
+                        
+                        {% for v in categories %}
+                        <div class="nav-item dropdown dropright" style="float: left;">
+                            <form action="{% url 'all' %}" method="POST">
+                                {% csrf_token %}
+                                
+                                <input type="hidden" value="{{ v }}" name="categories_list"/>
+
+                                <button class="btn btn-light text-left" style="height: 100%; width: 100%; color: black; background-color: aqua; border: none; "  type="submit">
+                                    <b>{{ v }}</b>
+                                </button>
+                                
+                            
+                            
+                        </form>
+                        </div>
+                        {% endfor %}
+
+                       
+                    
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9" style="background-color: black;">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0" style="background-color: black;">
+                    <a href="{% url 'index' %}" class="text-decoration-none d-block d-lg-none" >
+                        <span class="h1 text-uppercase bg-light px-2" style="border-color:black; color: black;">H1</span>
+                                    <span class="h1  bg-primary px-2 ml-n1" style="filter: invert(1); color:white ;">Market</span>
+                     </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon" ></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse"   style="background-color: black;" >
+                        
+                        <div class="navbar-nav mr-auto py-0" style="background-color: black;">
+                            <a href="{% url 'index' %}" class="nav-item nav-link" style="background-color: black; color: aqua;">Home</a>
+                            
+                            <a href="{% url 'contact' %}" class="nav-item nav-link" style="color: White; color: aqua;">Contact</a>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div id="container_card" class="btn-group " style="margin-left: 1px;  display: inline-block;">
+                            <button data-toggle="popover" data-content="" type="button" id="my_btn_iframe" style="background-color: transparent; border: none;" >
+                                <div>
+                                <img src="media/static_images/shopping_cart.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;"  style="display: inline-block;">
+                                <h6 id="products_in_card" hidden></h6>                               
+                                </div>
+                    </button>
+                 </div>
+                 <div style="width: 20px;"></div>
+
+                          <div class="btn-group " style="margin-left: 1px;  display: inline-block;">
+
+                                <button  class="btn btn-secondary dropdown-toggle" type="button" id="check_out" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;" >
+                                     <img src="media/static_images/check_out.jpg" style=" height:40px; width: 40px; ;  border-radius: 50%;  background-color: transparent;"> 
+                                </button>
+                            </div>
+
+
+
+
+                            
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div style="background-color: white; margin-left: 20px;" >
+        <form action="{% url 'all' %}" method="POST" >
+            {% csrf_token %}
+
+            <div id="for_mobile">
+        </div>
+
+               
+        </form>
+</div>  
+<br>
+<br>
+
+<div id="message_Add_to_cart">
+
+
+</div>
+<br>
+
+
+
+     {% for d in data %} 
+    <div class="container-fluid pb-5">
+        <div>
+           <div style="float: left;">
+
+                {% if d.main_img != "" %}
+                <div style="width:60px; clear:both; ">
+                    <button style="width:57px; border-color: transparent; background-color: transparent; " id="img_0_button">
+                <img style="height: 50px; width: 47px;" src="media/{{ d.main_img }}" id="img_m">
+            </button>
+            </div>
+                {% endif %}
+                <div style="width:57px; clear:both;">
+                    <button style="width:57px; border-color: transparent; background-color: transparent; " id="img_1_button">
+        
+                {% if d.img_list_1 != "" %}
+                <img style="height: 50px; width: 47px;" src="media/{{ d.img_list_1 }}" id="img_1">
+                </button>
+            </div>
+        
+                {% endif %}
+                {% if d.img_list_2 != "" %}
+                <div style="width:57px; clear:both;">
+        
+                <button style="width:57px; border-color: transparent; background-color: 
+                transparent; " id="img_2_button">
+        
+                <img style="height: 50px; width: 47px;" src="media/{{ d.img_list_2 }}"  id="img_2">
+        
+                </button>
+            </div>
+        
+                {% endif %}
+        
+                {% if d.img_list_3 != "" %}
+                
+                <div style="width:57px; clear:both;">
+                    <button style="width:57px; border-color: transparent; background-color: 
+                    transparent; " id="img_3_button">
+                <img style="height: 50px; width: 47px;" src="media/{{ d.img_list_3 }}"  id="img_3">
+            </button>
+        
+            </div>
+        
+                {% endif %}
+        
+                {% if d.img_list_4 != "" %}
+             
+                <div style="width:57px; clear:both;">
+                    <button style="width:57px; border-color: transparent; background-color: 
+                    transparent; " id="img_4_button">
+                <img style="height: 50px; width: 47px;" src="media/{{ d.img_list_4 }}"  id="img_4">
+            </button>
+        
+            </div>
+        
+                {% endif %}
+        
+                {% if d.img_list_5 != "" %}
+                
+                <div  style="width:57px; clear:both;">
+                    <button style="width:57px; border-color: transparent; background-color: 
+                    transparent; " id="img_5_button">
+                <img style="height: 50px; width: 47px;" src="media/{{ d.img_list_5 }}"  id="img_5">
+            </button>
+            </div>
+            
+            {% endif %}
+            </div>
+        </div>
+
+
+
+        <div class="row px-xl-5">
+            <div class="col-lg-5 mb-30" style="max-width:100%; max-height:80%; float: left;">
+            <img class="w-100 h-100" id="main_img" src="media/{{ d.main_img }}" style="object-fit: contain;" alt="Image">
+            </div>
+            <div style="float:left; width: 50%">
+                <div class="h-100 bg-light p-30">
+                    <h3 id="prod_name_global" name="prod_name_global">{{ d.product_name }}</h3>
+                    <div class="d-flex mb-3">
+                        <div class="text-primary mr-2">
+                            <small class="fas fa-star"></small>
+                            <small class="fas fa-star"></small>
+                            <small class="fas fa-star"></small>
+                            <small class="fas fa-star-half-alt"></small>
+                            <small class="far fa-star"></small>
+                        </div>
+                        <small class="pt-1">Category <b id="category_name_global" name="category_name_global">{{ d.category_name }}</b></small>
+    
+                    </div>
+                    <small> Sub Category <b id="child_name_global" name="child_name_global">{{ d.child_category }}</b></small>
+                    <br>
+                    
+                    <div style="display: inline-block;">
+                    <h6 class="font-weight-semi-bold mb-4"> <h3>Price:</h3> </h6>
+                    </div>  
+
+                        <div style="display: inline-block; border: 1px">
+
+                        <b style="color: yellowgreen;"><h3>  <h3 id="price" name="{{ d.price }}">{{ d.price }} {{ d.currency }} </b> </h3></b>
+
+                    </div>
+                    <p class="mb-4">Brief Description {{ d.brief_description }}</p>
+                    <div class="d-flex mb-3" style="float: left;">
+                        <strong class="text-dark mr-3" id="checkboxes_sizes">Sizes:</strong>
+                        </div>
+                        <div class="d-flex mb-3">
+                        <form>
+                            {% for sizes in d.size_of_clothes %}
+                            {% if sizes == "0" %}
+                      <script>
+                         element = document.getElementById("checkboxes_sizes");
+                            element.remove();
+                      </script>
+                      {%  else  %}
+                        <div id="checkboxes_sizes" class="custom-control" style="float: left;">
+                            <input type="checkbox"  id="{{ checkboxes_sizes }}" name="{{ sizes }}" >
+                            <label  for="{{ checkboxes_sizes }}">{{ sizes }}</label>
+                        </div>
+                        {% endif %}
+
+                        {% endfor %}
+                    </form>
+                    </div>
+                    <div class="d-flex mb-4" style="float: left;">
+                        <strong class="text-dark mr-3" id="checkboxes_colors"  >Colors:</strong>
+                        </div>
+                        <div class="d-flex mb-4"  >
+
+                        <form>
+                            {% for c in d.color  %}
+                            {% if c == "0" %}
+
+                            <script>
+                                const element = document.getElementById("checkboxes_colors");
+                                element.remove();
+                            </script>
+
+
+
+                            {% else %}
+
+                            <div id="checkboxes_colors"  class="custom-control " style="float: left;">
+                                <input type="checkbox"  id="checkboxes_colors" name="{{ c }}">
+                                <label  for="checkboxes_colors" >{{ c }}</label>
+                            </div>
+                            {% endif %}
+
+                            {% endfor %}
+                        </form>
+                    </div>
+                    
+                  
+
+
+
+                        <div class="d-flex align-items-center mb-4 pt-2">
+
+
+                    
+                            <div class="input-group quantity mr-3" style="width: 130px;">
+                                <div class="input-group-btn">
+                                    <button type="submit" id="minus" class="btn btn-outline-warning">
+                                        -
+                                    </button>
+                                </div>
+                                <input id="quan" type="text" class="form-control" style="background-color:white;" value="1">
+                                <div class="input-group-btn">
+                                    <form  id="quan_f"   method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input hidden name="quan12" placeholder="Type your Account"  value="gggg">
+
+                                    <button type="submit" id="plus" class="btn btn-outline-warning">
+                                        +
+                                    </button>
+                                    <input hidden id="cat_name1" name="cat_name" placeholder="Type your Account" value="{{ d.category_name }}">
+                                    <input hidden id="child_name2" name="child_name" placeholder="Type your Account" value="{{ d.child_category }}">
+                                    <input hidden id="prod_name3" name="prod_name" placeholder="Type your Account" value="{{ d.product_name }}">
+        
+
+
+                                </form>
+
+                                </div>
+
+                            </div>
+
+
+                        <button class="btn btn-outline-primary" id="add_to_cart"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                            Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="bg-light p-30">
+                    <div class="nav nav-tabs mb-4">
+                        <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
+                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
+                        <a class="nav-item nav-link text-dark" id="data_length" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-pane-1">
+                            <h4 class="mb-3">Product Description</h4>
+                            <p>{{d.Full_description}}</p>
+                        </div>
+                        <div class="tab-pane fade" id="tab-pane-2">
+                            <h4 class="mb-3">Additional Information</h4>
+                            <p>{{ d.information }}</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                </div>
+                        
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-pane-3">
+                            <div class="row">
+                                
+                                <!-- <div id="number_of_reviews" class="col-md-6" >
+                                    <h4 id="nummber_of_reveiws" class="mb-4">1 review for "Product Name"</h4>
+                                    </div>
+ -->
+
+
+
+
+                                    <div id="parent_comm" class="col-md-6" >
+                                    <div id="div_comment" class="media mb-4">
+                                        
+                                        <img id="client_pic" src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                        
+                                        <div id="comment_body" class="media-body">
+                                        
+                                            <h6 id="client_name" >John Doe<small> - <i id="date_from_db">01 Jan 2045</i></small></h6>
+                                            <!-- <small> - <i id="rating_from_db"></i></small> -->
+                                            <div id="rating_s" class="text-primary mb-2"><!-- star rating goes here --></div>
+                                        
+                                            <p id="client_comment">Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                        
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                <div  id="div_review">
+                                <div class="col-md-6">
+                                    <h4 class="mb-4">Leave a review</h4>
+                                    <small>Your email address will not be published. Required fields are marked </small>
+                                    <br>
+                                    <br>
+                                    <form id="review"  method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                    <input id="rating_input" value="" hidden>
+                                    <div class="mb-4" style="float: left;">
+                                                <p class="mb-4" style="float: left;">Your Rating * :  </p>
+                                                </div>
+                                        <label>
+
+                                        <div id="div_1" class="silver" style="float: left;">
+                                            <input id="1" type="radio" name="rating" style="visibility:hidden"  >
+                                        </div>
+                                    </label>
+
+                                        <label>
+
+                                        <div id="div_2" class="silver" style="float: left;">
+                            
+                                            <input id="2" type="radio" name="rating" style="visibility:hidden">
+                                        </div>
+                                    </label>
+
+                                        <label>
+                                        <div id="div_3"  class="silver" style="float: left;">
+                            
+                                            <input id="3" type="radio" name="rating" style="visibility:hidden">
+                                        </div>
+                                        </label>
+                            
+                                        <label>
+                                        <div id="div_4" class="silver" style="float: left;">
+                            
+                                            <input id="4" type="radio" name="rating" style="visibility:hidden">
+                                        </div>
+                                        </label>
+                            
+                                        <label>
+                                        <div id="div_5"  class="silver" style="float: left;">
+                            
+                                            <input id="5" type="radio" name="rating" style="visibility:hidden">
+                                        </div>
+                                        </label>
+                            
+                                        <label>
+                                        <div id="div_6"  class="silver" style="float: left;">
+                                            <input id="6" type="radio" name="rating" style="visibility:hidden">
+                                        </div>
+                                        </label>
+                            
+                                        <label>
+                                        <div  id="div_7" class="silver" style="float: left;">
+                                            <input id="7" type="radio" name="rating" style="visibility:hidden">
+                                          </div>
+                                          </label>
+                                        </div>
+                                    
+                                            <br>
+                                            <br>
+                                            <div class="form-group">
+                                                <label for="client_message">Your Review *</label>
+    
+                                                <textarea id="client_message" name="client_message" cols="30" rows="5" class="form-control"></textarea>
+                                            </div>
+    
+    
+    
+    
+    
+                                            <input id="client_account" value="{{ account }}" hidden >
+                                            {% if account == None %}
+                                            <div class="form-group">
+                                                <label for="name">Your Name *</label>
+                                                <input type="text" class="form-control" id="name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Your Email *</label>
+                                                <input type="email" class="form-control" id="email">
+                                            </div>
+                                            {% endif %}
+                                            
+                                            <div class="form-group mb-0">
+                                                <button type="submit" id="button_submit_review" class="btn btn-primary px-3">
+                                                    Submit Review</button>
+                                            </div>
+
+                                        </div>
+                                </div>
+                            </form>
+
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Shop Detail End -->
+
+    <!-- Shop Detail End -->
+
+
+    <!-- Products Start -->
+    
+    <div class="container-fluid py-5">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span style="color: black;">You May Also Like</span></h2>
+
+        <div class="row px-xl-5" >
+            <div class="col" >
+                <div class="owl-carousel related-carousel">
+                  {% if products_alike_is_null == 0 %}
+                  <h1>Nothing IS A Like</h1>
+                  {% else %}
+
+                  {% for i in products_alike %}
+                  <div class="card-group" style="float: left;">
+                    <div class="card" style="width: 400px; height: 150;" >
+                        <div style="width: 100%; height: min-content; ">
+                            <form action="{% url 'detail_product_page' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ i.product_name }}" name="view_product_name_3"/>
+                                <input type="hidden" value="{{ i.category_name_id }}" name="view_product_category_3"/>
+                                <input type="hidden" value="{{ i.child_category }}" name="view_child_category_3"/>
+                                <button type="submit" style="border: transparent;; width: 100%; height:300px; border-color: transparent; background: transparent; background-color:transparent ; ">
+
+                          <img class="card-img-top zoom" src="/media/{{ i.main_img }}" style="width: 100%; height:300px; " alt="Card image cap">
+                          </button>
+                          </form>
+
+                        </div>
+                          <div class="card-body">
+                            <h5 class="card-title"> {{ i.product_name }} </h5>
+                            <h6 class="card-title"> <b>Price</b> <b style="color: yellowgreen;"> {{ i.price }} {{ i.currency  }}</b> </b></h6>
+                            <p class="card-text">{{ i.brief_description }}</p>
+                            <div style="border: 1px; ">
+                            <div style="display: inline-block;">
+                            <!-- <button type="button" class="btn btn-outline-primary">Add to Cart</button>
+                        </div> -->
+                            <div style="display: inline-block; border: 1px">
+                            <form action="{% url 'detail_product_page' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ i.product_name }}" name="view_product_name_3"/>
+                                <input type="hidden" value="{{ i.category_name_id }}" name="view_product_category_3"/>
+                                <input type="hidden" value="{{ i.child_category }}" name="view_child_category_3"/>
+                                <button type="submit" class="btn btn-outline-warning" style="width: 360px;">View Product</button>          
+                            </form>
+                    </div>
+                </div>
+
+                          </div>
+                          <div style="height: 10px;"></div>
+
+                          <div class="card-footer">
+                            <small class="text-muted">Added on {{ i.time_Added }}</small>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+{% endfor %}
+
+
+
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Products End -->
+
+
+    <!-- Footer Start -->
+   
+     <!-- Footer Start -->
+     <div style="color:black">
+
+        <!-- class="container-fluid bg-dark text-secondary mt-5 pt-5" -->
+        <div class="row px-xl-5 pt-5">
+            
+
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5" style="height:50%;">
+                <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
+                {% for a in cmp_det %}
+                <p><b>Address: </b>{{ a.Address }}</p>
+                <p><b>E-mail: </b>{{ a.E_Mail }}</p>
+                <p><b>Give Us A Call: </b>{{ a.Company_Number }}</p>
+
+                {% endfor %}
+            </div>
+
+
+
+
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">SUPPORT</h5>
+                        <div  class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Help</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>FAQs</a>
+                            
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-5" style="float:left;">
+            <div style="margin-left: 10%;">
+            <h5 class="text-secondary text-uppercase mb-4">NEWSLETTER</h5>
+            <p style="color: black;">Would you would like to receive our latest products</p>
+            <form action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Your Email Address">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        </div>
+
+
+        <div style="margin-left: 50%; float:left;">
+            <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
+            <div>
+                <a href="https://www.facebook.com/">
+                    
+                    <img src="media/static_images/social_media_icons/facebook.png" style=" height: 40px;; width: 40px; "  >
+                </a>
+                <a  href="https://www.instagram.com/">
+                    <img src="media/static_images/social_media_icons/instagram.jpg" style=" height: 40px;; width: 40px; "  >
+
+                </a>
+                <a href="https://www.twitter.com/">
+                    <img src="media/static_images/social_media_icons/twitter.jpg" style=" height: 40px;; width: 40px; "  >
+
+                </a>
+                <a href="https://www.linkedin.com/">
+                    <img src="media/static_images/social_media_icons/linkedin.png" style=" height: 40px;; width: 40px; "  >
+
+                </a>
+            </div>
+    
+        </div>
+
+
+    <br>
+
+       
+
+    <div>
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer End -->
+
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><button class="btn btn-outline-primary" style="background-color: white ;"> Up</button></a>
+
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/multi_img_details_page.js' %}"></script>
+
+    <!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+
+    <script src="{% static 'js/bootstrap_old.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script> 
+
+
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'mail/contact.js' %}"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/product_counts.js' %}"></script>
+    <script src="{% static 'js/star_rating.js' %}"></script>
+    <script src="{% static 'js/review_ajax.js' %}"></script>
+    <script src="{% static 'js/get_review_ajax.js' %}"></script>
+    <script src="{% static 'js/search_bar_for_mobile.js' %}"></script> 
+
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/axios.min.js' %}"></script>
+    <script src="{% static 'js/add_to_cart.js' %}"></script>
+    <script src="{% static 'js/get_shopping_Card_first_time_for_details.js' %}"></script>
+
+    <script>
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

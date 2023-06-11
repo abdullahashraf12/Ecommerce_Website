@@ -1,0 +1,13 @@
+.word
+{
+  color: white;
+  background: red;
+  width: 30%;
+  height: 35%;
+  border-radius: 80%;
+  position: absolute;
+  font-size: xx-small;
+  top: 50%;
+  right: 35%;
+  text-align: center;
+}

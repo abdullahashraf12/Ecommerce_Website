@@ -1,0 +1,4 @@
+BEGIN
+  DBMS_SCHEDULER.RUN_JOB('My_job');
+END;
+/
